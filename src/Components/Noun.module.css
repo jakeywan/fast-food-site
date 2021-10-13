@@ -1,0 +1,16 @@
+img {
+  width: 540px;
+}
+
+.columns {
+  display: flex;
+}
+
+.columns .column {
+  padding: 16px;
+  padding-bottom: 0;
+}
+
+.name {
+  font-size: 32px;
+}

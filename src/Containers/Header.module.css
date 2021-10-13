@@ -1,5 +1,5 @@
 .container {
-  background: #e1d7d5;
+  background: #d5d7e1;
   position: absolute;
   top: 0;
   width: 100%;
@@ -9,12 +9,4 @@
 .wrap {
   margin: auto;
   max-width: 1140px;
-}
-
-.columns {
-  display: flex;
-}
-
-.columns .column {
-  padding: 16px;
 }

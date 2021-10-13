@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '../redux/store'
-import { loadNouns } from '../redux/actions'
+import { loadNouns, updateSettings } from '../redux/actions'
 
 export const fetchNouns = (owner) => {
   const address = '0xFbA74f771FCEE22f2FFEC7A66EC14207C7075a32'
@@ -17,6 +17,11 @@ export const fetchNouns = (owner) => {
         finalObj[token.token_id] = token
       })
       store.dispatch(loadNouns(finalObj))
+      // whenever we load new nouns, also auto-select the first one
+      store.dispatch(updateSettings({
+        ...store.getState().settings,
+        selectedNounId: res.data.assets[0].token_id
+      }))
       resolve(res.data)
     }).catch((err) => {
       console.log(err)

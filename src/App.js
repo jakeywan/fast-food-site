@@ -1,12 +1,16 @@
 import Header from './Containers/Header'
-import Nav from './Containers/Nav';
+import Nav from './Containers/Nav'
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 function App () {
   return (
-    <div className='App'>
-      <Nav />
-      <Header />
-    </div>
+    <Provider store={store}>
+      <div className='App'>
+        <Nav />
+        <Header />
+      </div>
+    </Provider>
   )
 }
 
