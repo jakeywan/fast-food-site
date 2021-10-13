@@ -14,3 +14,7 @@
 .columns {
   display: flex;
 }
+
+.columns .column {
+  padding: 16px;
+}

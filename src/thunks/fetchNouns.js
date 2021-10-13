@@ -1,6 +1,6 @@
 import axios from 'axios'
-// import store from '../redux/store'
-// import { updateNouns } from '../redux/actions'
+import store from '../redux/store'
+import { loadNouns } from '../redux/actions'
 
 export const fetchNouns = (owner) => {
   const address = '0xFbA74f771FCEE22f2FFEC7A66EC14207C7075a32'
@@ -11,8 +11,12 @@ export const fetchNouns = (owner) => {
       method: 'get'
     }
     axios.request(options).then((res) => {
-      // `res` is a plain array. Format it into an object with contract addresses as keys
-      // store.dispatch(updateNouns(finalObj))
+      // `res` is a plain array. Format it into an object with tokenIds as keys
+      let finalObj = {}
+      res.data.assets.forEach(token => {
+        finalObj[token.token_id] = token
+      })
+      store.dispatch(loadNouns(finalObj))
       resolve(res.data)
     }).catch((err) => {
       console.log(err)
