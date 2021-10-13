@@ -13,4 +13,26 @@ img {
 
 .name {
   font-size: 32px;
+  font-weight: 600;
+}
+
+.button {
+  background: #eed811;
+  padding: 24px;
+  font-size: 32px;
+  font-family: 'Londrina';
+  display: inline-block;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 32px;
+}
+
+.nextButtons {
+  display: flex;
+  margin-left: -8px;
+}
+
+.nextButtons div {
+  cursor: pointer;
+  padding: 8px;
 }

@@ -8,7 +8,7 @@ class Nav extends Component {
       <div className={styles.container}>
         <div className={styles.wrap}>
           <div className={styles.column}>
-            Fast Food Nouns
+            <span>Fast Food Nouns</span>
           </div>
           <div className={styles.column}>
             <ConnectButton />

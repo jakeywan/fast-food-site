@@ -48,9 +48,12 @@ class Noun extends Component {
               <img src={nouns.byId[settings.selectedNounId].image_url} />
             </div>
             <div className={styles.column}>
+              <div className={styles.nextButtons}>
+                <div onClick={() => this.change('back')}>Back</div>
+                <div onClick={() => this.change('next')}>Next</div>
+              </div>
               <div className={styles.name}>{selectedNoun.name}</div>
-              <div onClick={() => this.change('back')}>Back</div>
-              <div onClick={() => this.change('next')}>Next</div>
+              <div className={styles.button}>Try on clothes</div>
             </div>
           </React.Fragment>
         }
