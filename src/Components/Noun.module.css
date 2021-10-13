@@ -23,16 +23,17 @@ img {
   font-family: 'Londrina';
   display: inline-block;
   border-radius: 8px;
-  cursor: pointer;
+  /* cursor: pointer; */
   margin-top: 32px;
 }
 
 .nextButtons {
   display: flex;
   margin-left: -8px;
+  margin-top: 32px;
 }
 
 .nextButtons div {
-  cursor: pointer;
+  /* cursor: pointer; */
   padding: 8px;
 }
