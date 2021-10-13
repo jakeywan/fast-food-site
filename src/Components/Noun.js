@@ -53,6 +53,19 @@ class Noun extends Component {
       selectedNounId: newId
     }))
   }
+  tryOn = (id) => {
+    let newArray = this.state.tryingClothes
+    newArray.push(id)
+    this.setState({
+      tryingClothes: newArray
+    })
+  }
+  cancel = () => {
+    this.setState({
+      isTryingClothes: false,
+      tryClothes: []
+    })
+  }
   render () {
     const { nouns, settings, clothingStatesById } = this.props
     // If we don't have a selectedNounId but we do have nouns loaded, just
@@ -93,11 +106,11 @@ class Noun extends Component {
               <div className={styles.name}>{selectedNoun.name}</div>
               {!this.state.isTryingClothes &&
                 <div>
-                  <div className={styles.subHeader}>Currently wearing:</div>
+                  <div className={styles.subHeader}>Currently wearing</div>
                   {clothingStatesById[settings.selectedNounId] &&
                     clothingStatesById[settings.selectedNounId].map(item => {
                       return (
-                        <div className={styles.listItem}>✏️ &nbsp;&nbsp;{clothes[item].title}</div>
+                        <div className={styles.listItem}>{clothes[item].title}</div>
                       )
                     }
                   )}
@@ -105,22 +118,48 @@ class Noun extends Component {
               }
               {this.state.isTryingClothes &&
                 <div>
-                  <div className={styles.subHeader}>Trying on:</div>
+                  <div className={styles.subHeader}>Trying on</div>
                   {this.state.tryingClothes.length > 0 &&
                     this.state.tryingClothes.map(item => {
                       return (
                         <div className={styles.listItem}>
                           ✏️ &nbsp;&nbsp;{clothes[item].title}
-                          <div onClick={() => this.unwear(item)}>Take off</div>
+                          <div className={styles.removeButton}
+                            onClick={() => this.unwear(item)}>Remove</div>
                         </div>
                       )
                     }
                   )}
+                  <div>
+                    <div className={styles.divider}>Clothes you can try on</div>
+                    <div>
+                      {clothes.map((item, index) => {
+                        if (this.state.tryingClothes.indexOf(index) > -1) return null
+                        return (
+                          <div onClick={() => this.tryOn(index)}>
+                            {item.title}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
                 </div>
               }
-              <div onClick={this.tryClothes} className={styles.button}>
-                Try on clothes
-              </div>
+              {this.state.isTryingClothes &&
+                <div>
+                  <div
+                    onClick={this.tryClothes}
+                    className={`${styles.button} ${styles.saveButton}`}>
+                    Wear this stuff
+                  </div>
+                  <div className={styles.cancelButton} onClick={this.cancel}>Cancel</div>
+                </div>
+              }
+              {!this.state.isTryingClothes &&
+                <div onClick={this.tryClothes} className={styles.button}>
+                  Try on clothes
+                </div>
+              }
             </div>
           </React.Fragment>
         }

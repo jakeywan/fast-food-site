@@ -69,7 +69,30 @@ img {
   background: hsla(0,0%,100%,.3);
   width: 100%;
   border-radius: 8px;
-  padding: 8px;
+  padding: 16px;
   font-weight: 600;
   margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.removeButton {
+  color:#e11833;
+  display: inline;
+}
+
+.saveButton {
+  background: #068940;
+  color: white;
+}
+
+.cancelButton {
+  padding: 16px;
+  padding-left: 54px;
+}
+
+.divider {
+  padding-top: 16px;
+  padding-bottom: 8px;
 }
