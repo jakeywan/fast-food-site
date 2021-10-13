@@ -5,6 +5,7 @@ import store from '../redux/store'
 import { updateSettings } from '../redux/actions'
 import { clothes } from '../clothes'
 import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
+import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG';
 
 class Noun extends Component {
   state = {
@@ -14,9 +15,11 @@ class Noun extends Component {
   tryClothes = () => {
     // set `isTryingClothes` to true
     // set the clothes they already have on to the `tryingClothes` array
+    // making a copy here because it was messing with our redux state
+    let tryingClothes = Object.assign([], this.props.clothingStatesById[this.props.settings.selectedNounId])
     this.setState({
       isTryingClothes: true,
-      tryingClothes: this.props.clothingStatesById[this.props.settings.selectedNounId]
+      tryingClothes: tryingClothes
     })
   }
   unwear = (itemId) => {
@@ -67,11 +70,19 @@ class Noun extends Component {
         {selectedNoun &&
           <React.Fragment>
             <div className={styles.imageContainer}>
-              <img src={nouns.byId[settings.selectedNounId].image_url} />
+              {!this.state.isTryingClothes &&
+                <img src={nouns.byId[settings.selectedNounId].image_url} />
+              }
               {this.state.isTryingClothes &&
-                <div className={styles.svgOverlay}>
-                  <svg dangerouslySetInnerHTML={{ __html: composeSVGForClothingIds(this.state.tryingClothes) }} width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" />
-                </div>
+                // this basically creates an underlay (base SVG with no extra clothes)
+                // and an overlay (items you can select from). it defaults to showing
+                // items you're already wearing as selected.
+                <React.Fragment>
+                  <div className={styles.svgEditingContainer}>
+                    <div dangerouslySetInnerHTML={{ __html: removeClothesFromSVG(nouns.byId[settings.selectedNounId].token_metadata, clothingStatesById[settings.selectedNounId]) }} />
+                    <svg className={styles.overlay} dangerouslySetInnerHTML={{ __html: composeSVGForClothingIds(this.state.tryingClothes) }} width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"/>
+                  </div>
+                </React.Fragment>
               }
             </div>
             <div className={styles.column}>
