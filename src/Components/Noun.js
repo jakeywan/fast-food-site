@@ -4,8 +4,29 @@ import styles from './Noun.module.css'
 import store from '../redux/store'
 import { updateSettings } from '../redux/actions'
 import { clothes } from '../clothes'
+import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
 
 class Noun extends Component {
+  state = {
+    isTryingClothes: false,
+    tryingClothes: []
+  }
+  tryClothes = () => {
+    // set `isTryingClothes` to true
+    // set the clothes they already have on to the `tryingClothes` array
+    this.setState({
+      isTryingClothes: true,
+      tryingClothes: this.props.clothingStatesById[this.props.settings.selectedNounId]
+    })
+  }
+  unwear = (itemId) => {
+    const newArray = this.state.tryingClothes
+    const indexToRemove = this.state.tryingClothes.indexOf(itemId)
+    newArray.splice(itemId, 1)
+    this.setState({
+      tryingClothes: newArray
+    })
+  }
   change = (direction) => {
     const allIds = this.props.nouns.allIds
     const currentId = this.props.settings.selectedNounId
@@ -47,9 +68,11 @@ class Noun extends Component {
           <React.Fragment>
             <div className={styles.imageContainer}>
               <img src={nouns.byId[settings.selectedNounId].image_url} />
-              <div className={styles.svgOverlay}>
-                <svg dangerouslySetInnerHTML={{ __html: clothes[0].svg }} width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" />
-              </div>
+              {this.state.isTryingClothes &&
+                <div className={styles.svgOverlay}>
+                  <svg dangerouslySetInnerHTML={{ __html: composeSVGForClothingIds(this.state.tryingClothes) }} width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" />
+                </div>
+              }
             </div>
             <div className={styles.column}>
               <div className={styles.nextButtons}>
@@ -57,17 +80,36 @@ class Noun extends Component {
                 <div onClick={() => this.change('next')}>→</div>
               </div>
               <div className={styles.name}>{selectedNoun.name}</div>
-              <div>
-                <div className={styles.subHeader}>Currently wearing:</div>
-                {clothingStatesById[settings.selectedNounId] &&
-                  clothingStatesById[settings.selectedNounId].map(item => {
-                    return (
-                      <div className={styles.listItem}>✏️ &nbsp;&nbsp;{clothes[item].title}</div>
-                    )
-                  }
-                )}
+              {!this.state.isTryingClothes &&
+                <div>
+                  <div className={styles.subHeader}>Currently wearing:</div>
+                  {clothingStatesById[settings.selectedNounId] &&
+                    clothingStatesById[settings.selectedNounId].map(item => {
+                      return (
+                        <div className={styles.listItem}>✏️ &nbsp;&nbsp;{clothes[item].title}</div>
+                      )
+                    }
+                  )}
+                </div>
+              }
+              {this.state.isTryingClothes &&
+                <div>
+                  <div className={styles.subHeader}>Trying on:</div>
+                  {this.state.tryingClothes.length > 0 &&
+                    this.state.tryingClothes.map(item => {
+                      return (
+                        <div className={styles.listItem}>
+                          ✏️ &nbsp;&nbsp;{clothes[item].title}
+                          <div onClick={() => this.unwear(item)}>Take off</div>
+                        </div>
+                      )
+                    }
+                  )}
+                </div>
+              }
+              <div onClick={this.tryClothes} className={styles.button}>
+                Try on clothes
               </div>
-              <div className={styles.button}>Try on clothes</div>
             </div>
           </React.Fragment>
         }
