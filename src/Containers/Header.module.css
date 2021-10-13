@@ -1,0 +1,9 @@
+.container {
+  background: #e1d7d5;
+}
+
+.wrap {
+  display: flex;
+  max-width: 1140px;
+  margin: auto;
+}
