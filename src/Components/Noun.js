@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import styles from './Noun.module.css'
 import store from '../redux/store'
 import { updateSettings } from '../redux/actions'
+import { clothes } from '../clothes'
 
 class Noun extends Component {
   change = (direction) => {
@@ -46,6 +47,9 @@ class Noun extends Component {
           <React.Fragment>
             <div>
               <img src={nouns.byId[settings.selectedNounId].image_url} />
+              <div className={styles.svgOverlay}>
+                <svg dangerouslySetInnerHTML={{ __html: clothes[0].svg }} width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" />
+              </div>
             </div>
             <div className={styles.column}>
               <div className={styles.nextButtons}>

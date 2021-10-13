@@ -2,6 +2,11 @@ img {
   width: 540px;
 }
 
+.svgOverlay {
+  width: 540px;
+  height: 540px;
+}
+
 .columns {
   display: flex;
 }

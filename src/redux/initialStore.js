@@ -3,6 +3,7 @@ export const initialStore = {
     byId: {},
     allIds: []
   },
+  clothingStatesById: {},
   settings: {
     selectedNounId: ''
   }

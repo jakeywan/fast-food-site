@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '../redux/store'
 import { loadNouns, updateSettings } from '../redux/actions'
+import { fetchClothingStatePerNoun } from './fetchClothingStatePerNoun';
 
 export const fetchNouns = (owner) => {
   const address = '0xFbA74f771FCEE22f2FFEC7A66EC14207C7075a32'
@@ -22,6 +23,8 @@ export const fetchNouns = (owner) => {
         ...store.getState().settings,
         selectedNounId: res.data.assets[0].token_id
       }))
+      // also fetch and load clothing states for each of them
+      fetchClothingStatePerNoun(Object.keys(finalObj))
       resolve(res.data)
     }).catch((err) => {
       console.log(err)
