@@ -1,10 +1,23 @@
-img {
+.imageContainer {
   width: 540px;
+  height: 540px;
+  position: relative;
+}
+
+img {
+  width: 100%;
 }
 
 .svgOverlay {
-  width: 540px;
-  height: 540px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.svgOverlay svg {
+  width: 100%;
+  height: 100%;
 }
 
 .columns {
