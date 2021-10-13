@@ -1,0 +1,13 @@
+.container {
+  max-width: 1140px;
+  margin: auto;
+  z-index: 1;
+  position: relative;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
