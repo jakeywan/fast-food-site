@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from './Header.module.css'
 import ConnectButton from '../Components/ConectButton'
+import Noun from '../Components/Noun';
 
 class Header extends Component {
   render () {
@@ -8,8 +9,12 @@ class Header extends Component {
       <div className={styles.container}>
         <div className={styles.wrap}>
           <div className={styles.columns}>
-            <div>Noun guy</div>
-            <div>Selection controls</div>
+            <div className={styles.column}>
+              <Noun />
+            </div>
+            <div className={styles.column}>
+              Selection controls
+            </div>
           </div>
         </div>
       </div>

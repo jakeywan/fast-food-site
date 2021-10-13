@@ -7,10 +7,10 @@ class Nav extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.wrap}>
-          <div>
+          <div className={styles.column}>
             Fast Food Nouns
           </div>
-          <div>
+          <div className={styles.column}>
             <ConnectButton />
           </div>
         </div>        
