@@ -6,6 +6,7 @@ import { updateSettings } from '../redux/actions'
 import { clothes } from '../clothes'
 import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
 import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG';
+import { wearClothes } from '../thunks/wearClothes'
 
 class Noun extends Component {
   state = {
@@ -66,6 +67,9 @@ class Noun extends Component {
       tryClothes: []
     })
   }
+  onClickWearClothes = () => {
+    wearClothes(this.props.settings.selectedNounId, this.state.tryingClothes)
+  }
   render () {
     const { nouns, settings, clothingStatesById } = this.props
     // If we don't have a selectedNounId but we do have nouns loaded, just
@@ -93,7 +97,7 @@ class Noun extends Component {
                 <React.Fragment>
                   <div className={styles.svgEditingContainer}>
                     <div dangerouslySetInnerHTML={{ __html: removeClothesFromSVG(nouns.byId[settings.selectedNounId].token_metadata, clothingStatesById[settings.selectedNounId]) }} />
-                    <svg className={styles.overlay} dangerouslySetInnerHTML={{ __html: composeSVGForClothingIds(this.state.tryingClothes) }} width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"/>
+                    <svg className={styles.overlay} dangerouslySetInnerHTML={{ __html: composeSVGForClothingIds(this.state.tryingClothes) }} width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges"/>
                   </div>
                 </React.Fragment>
               }
@@ -148,7 +152,7 @@ class Noun extends Component {
               {this.state.isTryingClothes &&
                 <div>
                   <div
-                    onClick={this.tryClothes}
+                    onClick={this.onClickWearClothes}
                     className={`${styles.button} ${styles.saveButton}`}>
                     Wear this stuff
                   </div>
