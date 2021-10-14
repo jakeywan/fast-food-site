@@ -127,20 +127,20 @@ class Noun extends Component {
                     this.state.tryingClothes.map(item => {
                       return (
                         <div className={styles.listItem}>
-                          ✏️ &nbsp;&nbsp;{clothes[item].title}
+                          {clothes[item].title}
                           <div className={styles.removeButton}
                             onClick={() => this.unwear(item)}>Remove</div>
                         </div>
                       )
                     }
                   )}
-                  <div>
-                    <div className={styles.divider}>Clothes you can try on</div>
+                  <div style={{ marginTop: 24 }}>
+                    <div className={styles.subHeader}>Clothes you can try on</div>
                     <div>
                       {clothes.map((item, index) => {
                         if (this.state.tryingClothes.indexOf(index) > -1) return null
                         return (
-                          <div onClick={() => this.tryOn(index)}>
+                          <div onClick={() => this.tryOn(index)} className={styles.listItem}>
                             {item.title}
                           </div>
                         )
