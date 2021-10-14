@@ -23,11 +23,20 @@ img {
 
 .columns {
   display: flex;
+  justify-content: space-around;
+  max-height: 540px;
 }
 
 .columns .column {
   padding: 16px;
   padding-bottom: 0;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */;
+}
+
+.column::-webkit-scrollbar {
+  display: none;
 }
 
 .name {
@@ -75,6 +84,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .removeButton {
@@ -89,7 +99,7 @@ img {
 
 .cancelButton {
   padding: 16px;
-  padding-left: 83px;
+  padding-left: 132px;
 }
 
 .divider {

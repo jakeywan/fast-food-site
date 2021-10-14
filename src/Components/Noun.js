@@ -7,6 +7,7 @@ import { clothes } from '../clothes'
 import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
 import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG';
 import { wearClothes } from '../thunks/wearClothes'
+import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor'
 
 class Noun extends Component {
   state = {
@@ -49,9 +50,11 @@ class Noun extends Component {
         newId = allIds[allIds.length - 1]
       }
     }
+    const noun = this.props.nouns.byId[newId]
     store.dispatch(updateSettings({
       ...this.props.settings,
-      selectedNounId: newId
+      selectedNounId: newId,
+      backgroundColor: getSVGBackgroundColor(noun.token_metadata)
     }))
   }
   tryOn = (id) => {
@@ -122,18 +125,22 @@ class Noun extends Component {
               }
               {this.state.isTryingClothes &&
                 <div>
-                  <div className={styles.subHeader}>Trying on</div>
                   {this.state.tryingClothes.length > 0 &&
-                    this.state.tryingClothes.map(item => {
-                      return (
-                        <div className={styles.listItem}>
-                          {clothes[item].title}
-                          <div className={styles.removeButton}
-                            onClick={() => this.unwear(item)}>Remove</div>
-                        </div>
-                      )
-                    }
-                  )}
+                    <React.Fragment>
+                    <div className={styles.subHeader}>Trying on</div>
+                    {this.state.tryingClothes.length > 0 &&
+                      this.state.tryingClothes.map(item => {
+                        return (
+                          <div className={styles.listItem}>
+                            {clothes[item].title}
+                            <div className={styles.removeButton}
+                              onClick={() => this.unwear(item)}>Remove</div>
+                          </div>
+                        )
+                      }
+                    )}
+                    </React.Fragment>
+                  }
                   <div style={{ marginTop: 24 }}>
                     <div className={styles.subHeader}>Clothes you can try on</div>
                     <div>
@@ -154,7 +161,7 @@ class Noun extends Component {
                   <div
                     onClick={this.onClickWearClothes}
                     className={`${styles.button} ${styles.saveButton}`}>
-                    Wear this stuff
+                    Get dressed (on chain)
                   </div>
                   <div className={styles.cancelButton} onClick={this.cancel}>Cancel</div>
                 </div>
