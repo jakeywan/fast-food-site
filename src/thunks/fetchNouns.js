@@ -15,6 +15,7 @@ export const fetchNouns = (owner) => {
     axios.request(options).then((res) => {
       // `res` is a plain array. Format it into an object with tokenIds as keys
       let finalObj = {}
+      if (res.data.assets.length <= 0) return // no tokens, stop
       res.data.assets.forEach(token => {
         finalObj[token.token_id] = token
       })
