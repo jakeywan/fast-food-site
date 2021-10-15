@@ -5,6 +5,7 @@ export const initialStore = {
   },
   clothingStatesById: {},
   settings: {
-    selectedNounId: ''
+    selectedNounId: '',
+    backgroundColor: ''
   }
 }

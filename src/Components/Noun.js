@@ -27,7 +27,7 @@ class Noun extends Component {
   unwear = (itemId) => {
     const newArray = this.state.tryingClothes
     const indexToRemove = this.state.tryingClothes.indexOf(itemId)
-    newArray.splice(itemId, 1)
+    newArray.splice(indexToRemove, 1)
     this.setState({
       tryingClothes: newArray
     })
@@ -111,6 +111,7 @@ class Noun extends Component {
                 <div onClick={() => this.change('next')}>→</div>
               </div>
               <div className={styles.name}>{selectedNoun.name}</div>
+              <div><a href={selectedNoun.permalink}>View on OpenSea</a></div>
               {!this.state.isTryingClothes &&
                 <div>
                   <div className={styles.subHeader}>Currently wearing</div>
