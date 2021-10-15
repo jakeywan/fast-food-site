@@ -7,6 +7,7 @@ class ConnectButton extends Component {
     connectedAccount: ''
   }
   componentDidMount () {
+    if (!window.ethereum) return // prevents error thrown on mobile
     window.ethereum.on('accountsChanged', this.accountChangeHandler)
     setTimeout(() => {
       let address = window.ethereum.selectedAddress
