@@ -2,10 +2,13 @@
   width: 540px;
   height: 540px;
   position: relative;
+  flex-basis: 0;
+  flex-grow: 1;
 }
 
-img {
+.originalImage, .originalImage svg {
   width: 540px;
+  height: 540px;
 }
 
 .svgEditingContainer {
@@ -23,7 +26,6 @@ img {
 
 .columns {
   display: flex;
-  justify-content: space-around;
   max-height: 540px;
 }
 
@@ -33,6 +35,8 @@ img {
   overflow-y: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */;
+  flex-basis: 0;
+  flex-grow: .85;
 }
 
 .column::-webkit-scrollbar {

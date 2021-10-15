@@ -15,6 +15,14 @@ export function loadClothing (tokenId, clothesList) {
   }
 }
 
+export const LOAD_SVGS = 'LOAD_SVGS'
+export function loadSVGs (svgs) {
+  return {
+    type: LOAD_SVGS,
+    svgs
+  }
+}
+
 export const UPDATE_SETTINGS = 'UPDATE_SETTINGS'
 export function updateSettings (settings) {
   return {

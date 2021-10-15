@@ -74,7 +74,7 @@ class Noun extends Component {
     wearClothes(this.props.settings.selectedNounId, this.state.tryingClothes)
   }
   render () {
-    const { nouns, settings, clothingStatesById } = this.props
+    const { nouns, settings, clothingStatesById, svgsById } = this.props
     // If we don't have a selectedNounId but we do have nouns loaded, just
     // grab the first one and auto select it
     if (!settings.selectedNounId && nouns.allIds.length) {
@@ -90,8 +90,14 @@ class Noun extends Component {
         {selectedNoun &&
           <React.Fragment>
             <div className={styles.imageContainer}>
+              {!settings.connectedAddress &&
+                <div>nt connected</div>
+              }
               {!this.state.isTryingClothes &&
-                <img src={nouns.byId[settings.selectedNounId].image_url} />
+                // keeping this here in case we want to use opensea as fallback
+                // <img src={ || nouns.byId[settings.selectedNounId].image_url} />
+                <div className={styles.originalImage}
+                  dangerouslySetInnerHTML={{ __html: svgsById[settings.selectedNounId] }} />
               }
               {this.state.isTryingClothes &&
                 // this basically creates an underlay (base SVG with no extra clothes)
@@ -99,7 +105,7 @@ class Noun extends Component {
                 // items you're already wearing as selected.
                 <React.Fragment>
                   <div className={styles.svgEditingContainer}>
-                    <div dangerouslySetInnerHTML={{ __html: removeClothesFromSVG(nouns.byId[settings.selectedNounId].token_metadata, clothingStatesById[settings.selectedNounId]) }} />
+                    <div dangerouslySetInnerHTML={{ __html: removeClothesFromSVG(svgsById[settings.selectedNounId], clothingStatesById[settings.selectedNounId]) }} />
                     <svg className={styles.overlay} dangerouslySetInnerHTML={{ __html: composeSVGForClothingIds(this.state.tryingClothes) }} width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges"/>
                   </div>
                 </React.Fragment>
@@ -118,7 +124,7 @@ class Noun extends Component {
                   {clothingStatesById[settings.selectedNounId] &&
                     clothingStatesById[settings.selectedNounId].map(item => {
                       return (
-                        <div className={styles.listItem}>{clothes[item].title}</div>
+                        <div key={item.title} className={styles.listItem}>{clothes[item].title}</div>
                       )
                     }
                   )}
@@ -184,7 +190,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     nouns: state.nouns,
     clothingStatesById: state.clothingStatesById,
-    settings: state.settings
+    settings: state.settings,
+    svgsById: state.svgsById
   }
 }
 

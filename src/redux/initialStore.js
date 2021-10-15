@@ -3,9 +3,11 @@ export const initialStore = {
     byId: {},
     allIds: []
   },
+  svgsById: {},
   clothingStatesById: {},
   settings: {
     selectedNounId: '',
-    backgroundColor: ''
+    backgroundColor: '',
+    connectedAddress: ''
   }
 }
