@@ -90,9 +90,9 @@ class Noun extends Component {
         {selectedNoun &&
           <React.Fragment>
             <div className={styles.imageContainer}>
-              {!settings.connectedAddress &&
+              {/* {!settings.connectedAddress &&
                 <div>nt connected</div>
-              }
+              } */}
               {!this.state.isTryingClothes &&
                 // keeping this here in case we want to use opensea as fallback
                 // <img src={ || nouns.byId[settings.selectedNounId].image_url} />
