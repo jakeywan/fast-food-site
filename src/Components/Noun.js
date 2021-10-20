@@ -117,7 +117,7 @@ class Noun extends Component {
                 <div onClick={() => this.change('next')}>→</div>
               </div>
               <div className={styles.name}>{selectedNoun.name}</div>
-              <div><a href={selectedNoun.permalink}>View on OpenSea</a></div>
+              <div><a href={selectedNoun.permalink} target='_blank'>View on OpenSea</a></div>
               {!this.state.isTryingClothes &&
                 <div>
                   <div className={styles.subHeader}>Currently wearing</div>
