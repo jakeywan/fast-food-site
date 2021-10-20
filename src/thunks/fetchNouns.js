@@ -10,7 +10,7 @@ export const fetchNouns = (owner) => {
   return new Promise((resolve, reject) => {
     // NOTE: we can omit the key in development, but need one in production
     const options = {
-      url: `https://api.opensea.io/api/v1/assets?owner=${owner}&asset_contract_address=${address}`,
+      url: !owner ? `https://api.opensea.io/api/v1/assets?asset_contract_address=${address}&token_ids=${Math.floor(Math.random() * 1000)}` : `https://api.opensea.io/api/v1/assets?owner=${owner}&asset_contract_address=${address}`,
       method: 'get'
     }
     axios.request(options).then((res) => {
@@ -25,6 +25,7 @@ export const fetchNouns = (owner) => {
       store.dispatch(updateSettings({
         ...store.getState().settings,
         selectedNounId: res.data.assets[0].token_id,
+        connectedAddress: owner,
         backgroundColor: getSVGBackgroundColor(res.data.assets[0].token_metadata)
       }))
       // also fetch and load clothing states for each of them
