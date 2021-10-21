@@ -8,14 +8,12 @@ import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
 import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG'
 import { wearClothes } from '../thunks/wearClothes'
 import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor'
-import { fetchNouns } from '../thunks/fetchNouns'
 
 class Noun extends Component {
   state = {
     isTryingClothes: false,
     tryingClothes: []
   }
-
   tryClothes = () => {
     // set `isTryingClothes` to true
     // set the clothes they already have on to the `tryingClothes` array
