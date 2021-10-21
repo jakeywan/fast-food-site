@@ -1,41 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import styles from "./Noun.module.css";
-import store from "../redux/store";
-import { updateSettings } from "../redux/actions";
-import { clothes } from "../clothes";
-import { composeSVGForClothingIds } from "../utilities/composeSVGForClothingIds";
-import { removeClothesFromSVG } from "../utilities/removeClothesFromSVG";
-import { wearClothes } from "../thunks/wearClothes";
-import { getSVGBackgroundColor } from "../utilities/getSVGBackgroundColor";
-import { fetchNouns } from "../thunks/fetchNouns";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import styles from './Noun.module.css'
+import store from '../redux/store'
+import { updateSettings } from '../redux/actions'
+import { clothes } from '../clothes'
+import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
+import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG'
+import { wearClothes } from '../thunks/wearClothes'
+import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor'
+import { fetchNouns } from '../thunks/fetchNouns'
 
 class Noun extends Component {
   state = {
     isTryingClothes: false,
-    tryingClothes: [],
-    connectedAccount: ""
-  };
-
-  constructor(props) {
-    super(props);
-    this.setState({
-      connectedAccount: props.settings.connectedAddress,
-    });
-    fetchNouns();
-  }
-
-  componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-    if (
-      this.props.settings.connectedAddress ===
-      prevProps.settings.connectedAddress
-    )
-      return;
-
-    this.setState({
-      connectedAccount: this.props.settings.connectedAddress,
-    });
+    tryingClothes: []
   }
 
   tryClothes = () => {
@@ -45,65 +23,65 @@ class Noun extends Component {
     let tryingClothes = Object.assign(
       [],
       this.props.clothingStatesById[this.props.settings.selectedNounId]
-    );
+    )
     this.setState({
       isTryingClothes: true,
-      tryingClothes: tryingClothes,
-    });
-  };
-  unwear = (itemId) => {
-    const newArray = this.state.tryingClothes;
-    const indexToRemove = this.state.tryingClothes.indexOf(itemId);
-    newArray.splice(indexToRemove, 1);
+      tryingClothes: tryingClothes
+    })
+  }
+  unwear = itemId => {
+    const newArray = this.state.tryingClothes
+    const indexToRemove = this.state.tryingClothes.indexOf(itemId)
+    newArray.splice(indexToRemove, 1)
     this.setState({
-      tryingClothes: newArray,
-    });
-  };
-  change = (direction) => {
-    const allIds = this.props.nouns.allIds;
-    const currentId = this.props.settings.selectedNounId;
-    const currentIndex = allIds.indexOf(currentId);
-    let newId;
-    if (direction === "next") {
+      tryingClothes: newArray
+    })
+  }
+  change = direction => {
+    const allIds = this.props.nouns.allIds
+    const currentId = this.props.settings.selectedNounId
+    const currentIndex = allIds.indexOf(currentId)
+    let newId
+    if (direction === 'next') {
       if (allIds[currentIndex + 1]) {
-        newId = allIds[currentIndex + 1];
+        newId = allIds[currentIndex + 1]
       } else {
-        newId = allIds[0];
+        newId = allIds[0]
       }
     } else {
       if (allIds[currentIndex - 1]) {
-        newId = allIds[currentIndex - 1];
+        newId = allIds[currentIndex - 1]
       } else {
-        newId = allIds[allIds.length - 1];
+        newId = allIds[allIds.length - 1]
       }
     }
-    const noun = this.props.nouns.byId[newId];
+    const noun = this.props.nouns.byId[newId]
     store.dispatch(
       updateSettings({
         ...this.props.settings,
         selectedNounId: newId,
-        backgroundColor: getSVGBackgroundColor(noun.token_metadata),
+        backgroundColor: getSVGBackgroundColor(noun.token_metadata)
       })
-    );
-  };
-  tryOn = (id) => {
-    let newArray = this.state.tryingClothes;
-    newArray.push(id);
+    )
+  }
+  tryOn = id => {
+    let newArray = this.state.tryingClothes
+    newArray.push(id)
     this.setState({
-      tryingClothes: newArray,
-    });
-  };
+      tryingClothes: newArray
+    })
+  }
   cancel = () => {
     this.setState({
       isTryingClothes: false,
-      tryClothes: [],
-    });
-  };
+      tryClothes: []
+    })
+  }
   onClickWearClothes = () => {
-    wearClothes(this.props.settings.selectedNounId, this.state.tryingClothes);
-  };
-  render() {
-    const { nouns, settings, clothingStatesById, svgsById } = this.props;
+    wearClothes(this.props.settings.selectedNounId, this.state.tryingClothes)
+  }
+  render () {
+    const { nouns, settings, clothingStatesById, svgsById } = this.props
 
     // If we don't have a selectedNounId but we do have nouns loaded, just
     // grab the first one and auto select it
@@ -111,13 +89,13 @@ class Noun extends Component {
       store.dispatch(
         updateSettings({
           ...settings,
-          selectedNounId: nouns.byId[nouns.allIds[0]],
+          selectedNounId: nouns.byId[nouns.allIds[0]]
         })
-      );
+      )
     }
 
     const selectedNoun =
-      settings.selectedNounId && nouns.byId[settings.selectedNounId];
+      settings.selectedNounId && nouns.byId[settings.selectedNounId]
 
     return (
       <div className={styles.columns}>
@@ -133,7 +111,7 @@ class Noun extends Component {
                 <div
                   className={styles.originalImage}
                   dangerouslySetInnerHTML={{
-                    __html: svgsById[settings.selectedNounId],
+                    __html: svgsById[settings.selectedNounId]
                   }}
                 />
               )}
@@ -148,7 +126,7 @@ class Noun extends Component {
                         __html: removeClothesFromSVG(
                           svgsById[settings.selectedNounId],
                           clothingStatesById[settings.selectedNounId]
-                        ),
+                        )
                       }}
                     />
                     <svg
@@ -156,30 +134,30 @@ class Noun extends Component {
                       dangerouslySetInnerHTML={{
                         __html: composeSVGForClothingIds(
                           this.state.tryingClothes
-                        ),
+                        )
                       }}
-                      width="320"
-                      height="320"
-                      viewBox="0 0 320 320"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      shapeRendering="crispEdges"
+                      width='320'
+                      height='320'
+                      viewBox='0 0 320 320'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                      shapeRendering='crispEdges'
                     />
                   </div>
                 </React.Fragment>
               )}
             </div>
             <div className={styles.column}>
-              {!!this.state.connectedAccount && (
+              {!!settings.connectedAddress && (
                 <div className={styles.nextButtons}>
-                  <div onClick={() => this.change("back")}>←</div>
-                  <div onClick={() => this.change("next")}>→</div>
+                  <div onClick={() => this.change('back')}>←</div>
+                  <div onClick={() => this.change('next')}>→</div>
                 </div>
               )}
 
               <div className={styles.name}>{selectedNoun.name}</div>
               <div>
-                <a href={selectedNoun.permalink} target="_blank">
+                <a href={selectedNoun.permalink} target='_blank'>
                   View on OpenSea
                 </a>
               </div>
@@ -187,12 +165,12 @@ class Noun extends Component {
                 <div>
                   <div className={styles.subHeader}>Currently wearing</div>
                   {clothingStatesById[settings.selectedNounId] &&
-                    clothingStatesById[settings.selectedNounId].map((item) => {
+                    clothingStatesById[settings.selectedNounId].map(item => {
                       return (
                         <div key={item.title} className={styles.listItem}>
                           {clothes[item].title}
                         </div>
-                      );
+                      )
                     })}
                 </div>
               )}
@@ -202,7 +180,7 @@ class Noun extends Component {
                     <React.Fragment>
                       <div className={styles.subHeader}>Trying on</div>
                       {this.state.tryingClothes.length > 0 &&
-                        this.state.tryingClothes.map((item) => {
+                        this.state.tryingClothes.map(item => {
                           return (
                             <div className={styles.listItem}>
                               {clothes[item].title}
@@ -213,7 +191,7 @@ class Noun extends Component {
                                 Remove
                               </div>
                             </div>
-                          );
+                          )
                         })}
                     </React.Fragment>
                   )}
@@ -223,8 +201,7 @@ class Noun extends Component {
                     </div>
                     <div>
                       {clothes.map((item, index) => {
-                        if (this.state.tryingClothes.indexOf(index) > -1)
-                          return null;
+                        if (this.state.tryingClothes.indexOf(index) > -1) { return null }
                         return (
                           <div
                             onClick={() => this.tryOn(index)}
@@ -232,7 +209,7 @@ class Noun extends Component {
                           >
                             {item.title}
                           </div>
-                        );
+                        )
                       })}
                     </div>
                   </div>
@@ -240,12 +217,14 @@ class Noun extends Component {
               )}
               {this.state.isTryingClothes && (
                 <div>
-                  <div
-                    onClick={this.onClickWearClothes}
-                    className={`${styles.button} ${styles.saveButton}`}
-                  >
-                    Get dressed (on chain)
-                  </div>
+                  {settings.connectedAddress &&
+                    <div
+                      onClick={this.onClickWearClothes}
+                      className={`${styles.button} ${styles.saveButton}`}
+                    >
+                      Get dressed (on chain)
+                    </div>
+                  }
                   <div className={styles.cancelButton} onClick={this.cancel}>
                     Cancel
                   </div>
@@ -260,7 +239,7 @@ class Noun extends Component {
           </React.Fragment>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -269,8 +248,8 @@ const mapStateToProps = (state, ownProps) => {
     nouns: state.nouns,
     clothingStatesById: state.clothingStatesById,
     settings: state.settings,
-    svgsById: state.svgsById,
-  };
-};
+    svgsById: state.svgsById
+  }
+}
 
-export default connect(mapStateToProps)(Noun);
+export default connect(mapStateToProps)(Noun)
