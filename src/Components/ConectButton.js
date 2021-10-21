@@ -14,7 +14,8 @@ class ConnectButton extends Component {
       if (address) {
         this.setState({ connectedAccount: address })
         fetchNouns(address)
-        // this.getCollections(address)
+      } else {
+        fetchNouns()
       }
     }, 500)
     
