@@ -11,7 +11,7 @@ const Explainer = () => {
         with on chain clothing and accessories. The designs are curated and funded
         by the DAO. Shout out to the original <a href='https://nouns.wtf'>Nouns</a>,
         without whom we would not be here serving up delicious french fries and
-        shakes. Join us on <a href='https://discord.gg/c4stArj9'>Discord</a>. 
+        shakes. Join us on <a href='https://discord.gg/SgRzQyZQwc'>Discord</a>. 
       </div>
     </div>
   )
