@@ -8,6 +8,7 @@ import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
 import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG'
 import { wearClothes } from '../thunks/wearClothes'
 import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor'
+import ClothingSelector from './ClothingSelector';
 
 class Noun extends Component {
   state = {
@@ -152,7 +153,6 @@ class Noun extends Component {
                   <div onClick={() => this.change('next')}>→</div>
                 </div>
               )}
-
               <div className={styles.name}>{selectedNoun.name}</div>
               <div>
                 <a href={selectedNoun.permalink} target='_blank'>
@@ -173,60 +173,14 @@ class Noun extends Component {
                 </div>
               )}
               {this.state.isTryingClothes && (
-                <div>
-                  {this.state.tryingClothes.length > 0 && (
-                    <React.Fragment>
-                      <div className={styles.subHeader}>Trying on</div>
-                      {this.state.tryingClothes.length > 0 &&
-                        this.state.tryingClothes.map(item => {
-                          return (
-                            <div className={styles.listItem}>
-                              {clothes[item].title}
-                              <div
-                                className={styles.removeButton}
-                                onClick={() => this.unwear(item)}
-                              >
-                                Remove
-                              </div>
-                            </div>
-                          )
-                        })}
-                    </React.Fragment>
-                  )}
-                  <div style={{ marginTop: 24 }}>
-                    <div className={styles.subHeader}>
-                      Clothes you can try on
-                    </div>
-                    <div>
-                      {clothes.map((item, index) => {
-                        if (this.state.tryingClothes.indexOf(index) > -1) { return null }
-                        return (
-                          <div
-                            onClick={() => this.tryOn(index)}
-                            className={styles.listItem}
-                          >
-                            {item.title}
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                </div>
-              )}
-              {this.state.isTryingClothes && (
-                <div>
-                  {settings.connectedAddress &&
-                    <div
-                      onClick={this.onClickWearClothes}
-                      className={`${styles.button} ${styles.saveButton}`}
-                    >
-                      Get dressed (on chain)
-                    </div>
-                  }
-                  <div className={styles.cancelButton} onClick={this.cancel}>
-                    Cancel
-                  </div>
-                </div>
+                <ClothingSelector
+                  tryingClothes={this.state.tryingClothes}
+                  unwear={this.unwear}
+                  tryOn={this.tryOn}
+                  settings={settings}
+                  cancel={this.cancel}
+                  onClickWearClothes={this.onClickWearClothes}
+                />
               )}
               {!this.state.isTryingClothes && (
                 <div onClick={this.tryClothes} className={styles.button}>
