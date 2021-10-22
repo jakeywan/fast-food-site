@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-rinkeby": "REACT_APP_RINKEBY=TRUE react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

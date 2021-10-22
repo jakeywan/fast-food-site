@@ -6,11 +6,16 @@ import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor';
 import { fetchSVGsFromNode } from './fetchSVGsFromNode';
 
 export const fetchNouns = (owner) => {
-  const address = '0xFbA74f771FCEE22f2FFEC7A66EC14207C7075a32'
+  const address = process.env.REACT_APP_RINKEBY
+    ? '0x419CCFf619E671DD772C0Fc7326a5c0368EA751c'
+    : '0xFbA74f771FCEE22f2FFEC7A66EC14207C7075a32'
   return new Promise((resolve, reject) => {
     // NOTE: we can omit the key in development, but need one in production
+    const baseUrl = `https://${process.env.REACT_APP_RINKEBY && 'rinkeby-'}api.opensea.io/api/v1`
     const options = {
-      url: !owner ? `https://api.opensea.io/api/v1/assets?asset_contract_address=${address}&token_ids=${Math.floor(Math.random() * 1000)}` : `https://api.opensea.io/api/v1/assets?owner=${owner}&asset_contract_address=${address}`,
+      url: !owner
+        ? `${baseUrl}/assets?asset_contract_address=${address}&token_ids=${Math.floor(Math.random() * 1000)}`
+        : `${baseUrl}/assets?owner=${owner}&asset_contract_address=${address}`,
       method: 'get'
     }
     axios.request(options).then((res) => {
