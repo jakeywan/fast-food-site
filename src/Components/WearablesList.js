@@ -24,6 +24,9 @@ const Wearables = (props) => {
       {renderList(wearables.nounsBodies, 'Basic Shirts')}
       {renderList(wearables.nounsAccessories, 'Basic Accessories')}
       {renderList(wearables.nounsGlasses, 'Basic Glasses')}
+      {renderList(wearables.customBodies, 'Custom Shirts')}
+      {renderList(wearables.customHats, 'Custom Hats')}
+      {renderList(wearables.customGlasses, 'Custom Glasses')}
     </div>
   )
 }
