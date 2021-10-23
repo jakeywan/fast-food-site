@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Web3 from 'web3'
-import { fetchNouns } from '../thunks/fetchNouns';
+import { fetchNouns } from '../thunks/fetchNouns'
+import { getProvider } from '../utilities/getProvider'
 
 class ConnectButton extends Component {
   state = {
     connectedAccount: ''
   }
   componentDidMount () {
+    // Get the connected account & setup event handler for account change
     if (!window.ethereum) return // prevents error thrown on mobile
     window.ethereum.on('accountsChanged', this.accountChangeHandler)
     setTimeout(() => {
@@ -18,7 +20,6 @@ class ConnectButton extends Component {
         fetchNouns()
       }
     }, 500)
-    
   }
   accountChangeHandler = (accounts) => {
     this.setState({ connectedAccount: accounts[0] })

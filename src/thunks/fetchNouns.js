@@ -12,10 +12,10 @@ export const fetchNouns = (owner) => {
     : '0xFbA74f771FCEE22f2FFEC7A66EC14207C7075a32'
   return new Promise((resolve, reject) => {
     // NOTE: we can omit the key in development, but need one in production
-    const baseUrl = `https://${isRinkeby && 'rinkeby-'}api.opensea.io/api/v1`
+    const baseUrl = `https://${isRinkeby ? 'rinkeby-' : ''}api.opensea.io/api/v1`
     const options = {
       url: !owner
-        ? `${baseUrl}/assets?asset_contract_address=${address}&token_ids=${Math.floor(Math.random() * 1000)}`
+        ? `${baseUrl}/assets?asset_contract_address=${address}&token_ids=${Math.floor(Math.random() * 20)}`
         : `${baseUrl}/assets?owner=${owner}&asset_contract_address=${address}`,
       method: 'get'
     }
