@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
-import { clothes } from '../clothes'
+import { clothes } from '../wearables/clothes'
 import styles from './ClothingSelector.module.css'
+import { fetchAllWearables } from '../thunks/fetchAllWearables'
+import WearablesList from './WearablesList';
 
 class ClothingSelector extends Component {
+  componentDidMount () {
+    fetchAllWearables()
+  }
   render () {
     const { tryingClothes, unwear, tryOn, settings, cancel, onClickWearClothes } = this.props
     return (
@@ -42,6 +47,7 @@ class ClothingSelector extends Component {
                 </div>
               )
             })}
+            <WearablesList />
           </div>
         </div>
         <div>

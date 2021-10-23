@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-export const ffnDescriptorFactory = async (optionalSigner) => {
+export const descriptorContractFactory = async (optionalSigner) => {
   const isRinkeby = window.location.search.indexOf('rinkeby') > -1
   // Connect to the network
   let provider = new ethers.providers.InfuraProvider(

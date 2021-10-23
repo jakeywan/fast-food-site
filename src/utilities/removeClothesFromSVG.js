@@ -1,4 +1,4 @@
-import { clothes } from '../clothes'
+import { clothes } from '../wearables/clothes'
 
 // takes the tokenMetadata, decodes it, cross checks it with strings of clothes
 // we know this noun is wearing, and removes them from the SVG to achieve the

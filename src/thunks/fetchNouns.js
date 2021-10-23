@@ -1,9 +1,9 @@
 import axios from 'axios'
 import store from '../redux/store'
 import { loadNouns, updateSettings } from '../redux/actions'
-import { fetchClothingStatePerNoun } from './fetchClothingStatePerNoun';
-import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor';
-import { fetchSVGsFromNode } from './fetchSVGsFromNode';
+import { fetchClothingStatePerNoun } from './fetchClothingStatePerNoun'
+import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor'
+import { fetchSVGsFromNode } from './fetchSVGsFromNode'
 
 export const fetchNouns = (owner) => {
   const isRinkeby = window.location.search.indexOf('rinkeby') > -1

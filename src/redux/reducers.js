@@ -1,6 +1,6 @@
 import { initialStore } from './initialStore'
 import {
-  LOAD_NOUNS, UPDATE_SETTINGS, LOAD_CLOTHING, LOAD_SVGS
+  LOAD_NOUNS, UPDATE_SETTINGS, LOAD_CLOTHING, LOAD_SVGS, UPDATE_WEARABLES
 } from './actions'
 
 function ffnApp (state = initialStore, action) {
@@ -29,6 +29,12 @@ function ffnApp (state = initialStore, action) {
       return Object.assign({}, state, {
         svgsById: {
           ...action.svgs
+        }
+      })
+    case UPDATE_WEARABLES:
+      return Object.assign({}, state, {
+        wearables: {
+          ...action.wearables
         }
       })
     default:
