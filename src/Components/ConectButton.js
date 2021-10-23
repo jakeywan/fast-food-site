@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Web3 from 'web3'
 import { fetchNouns } from '../thunks/fetchNouns'
-import { getProvider } from '../utilities/getProvider'
 
 class ConnectButton extends Component {
   state = {
