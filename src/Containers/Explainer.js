@@ -4,7 +4,7 @@ import styles from './Explainer.module.css'
 const Explainer = () => {
   return (
     <div className={styles.explainer}>
-      <h1 >You want fries with that?</h1>
+      <h1>You want fries with that?</h1>
       <div>
         Fast Food Nouns is an on-chain NFT project run by the FastFoodDAO. FFNs
         are rendered entirely on chain, and can be customized by their owners

@@ -1,4 +1,4 @@
-import { clothes } from '../clothes'
+import { clothes } from '../wearables/clothes'
 
 export const composeSVGForClothingIds = (ids) => {
   let finalSnippets = ''

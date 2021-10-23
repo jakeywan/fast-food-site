@@ -30,3 +30,11 @@ export function updateSettings (settings) {
     settings
   }
 }
+
+export const UPDATE_WEARABLES = 'UPDATE_WEARABLES'
+export function updateWearables (wearables) {
+  return {
+    type: UPDATE_WEARABLES,
+    wearables
+  }
+}

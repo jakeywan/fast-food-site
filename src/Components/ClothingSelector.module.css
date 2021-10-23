@@ -1,0 +1,45 @@
+.subHeader {
+  font-size: 21px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.listItem {
+  font-size: 16px;
+  background: hsla(0,0%,100%,.3);
+  width: 100%;
+  border-radius: 8px;
+  padding: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.removeButton {
+  color:#e11833;
+  display: inline;
+}
+
+.button {
+  padding: 24px;
+  font-size: 32px;
+  font-family: 'Londrina';
+  display: inline-block;
+  border-radius: 8px;
+  /* cursor: pointer; */
+  margin-top: 32px;
+}
+
+.saveButton {
+  background: #068940;
+  color: white;
+}
+
+.cancelButton {
+  padding: 16px;
+  padding-left: 0;
+  padding-bottom: 48px;
+}
