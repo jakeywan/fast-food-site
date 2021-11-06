@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { clothes } from '../wearables/clothes'
 import styles from './ClothingSelector.module.css'
 import { fetchAllWearables } from '../thunks/fetchAllWearables'
-import WearablesList from './WearablesList';
+// import WearablesList from './WearablesList';
 
 class ClothingSelector extends Component {
   componentDidMount () {
@@ -47,7 +47,7 @@ class ClothingSelector extends Component {
                 </div>
               )
             })}
-            <WearablesList />
+            {/* <WearablesList /> */}
           </div>
         </div>
         <div>
