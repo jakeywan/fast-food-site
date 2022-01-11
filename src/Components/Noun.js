@@ -26,7 +26,7 @@ class Noun extends Component {
   componentWillUnmount () {
     store.dispatch(updateSettings({
       ...this.props.settings,
-      backgroundColor: '#e1d7d5'
+      backgroundColor: ''
     }))
   }
   tryClothes = () => {

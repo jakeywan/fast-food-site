@@ -7,10 +7,11 @@ import { createBrowserHistory } from "history"
 
 class Nav extends Component {
   render () {
+    const { settings } = this.props
     return (
       <div
         className={styles.container}
-        style={{ background: settings.backgroundColor }}>
+        style={{ background: settings.backgroundColor || '#e1d7d5' }}>
         <div className={styles.wrap}>
           <div className={styles.column}>
             <Link to='/'><span>FFNs</span></Link>
