@@ -5,6 +5,7 @@ import { ethers } from 'ethers'
 import { getSVGFromEncodedURI } from '../utilities/getSVGFromEncodedURI';
 import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor';
 import { wearablesContractFactory } from '../utilities/wearablesContractFactory';
+import { getNameFromEncodedURI } from '../utilities/getNameFromEncodedURI';
 
 export const fetchWearables = async (owner) => {
   console.log(owner)
@@ -37,7 +38,8 @@ export const fetchWearables = async (owner) => {
 
     let finalData = {
       id: i,
-      rect: getSVGFromEncodedURI(wearable)
+      rect: getSVGFromEncodedURI(wearable),
+      name: getNameFromEncodedURI(wearable)
     }
 
     store.dispatch(loadWearable(finalData))

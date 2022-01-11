@@ -26,6 +26,7 @@ class Header extends Component {
                     xmlns='http://www.w3.org/2000/svg'
                     shapeRendering='crispEdges'
                   />
+                  <div>{wearables.byId[id].name}</div>
                 </div>
               )
             })}
