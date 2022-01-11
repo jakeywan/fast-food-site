@@ -8,6 +8,7 @@ import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG'
 import { wearClothes } from '../thunks/wearClothes'
 import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor'
 import ClothingSelector from './ClothingSelector'
+import { getRectFromSVG } from '../utilities/getRectFromSVG';
 
 class Noun extends Component {
   state = {
@@ -60,7 +61,7 @@ class Noun extends Component {
     wearClothes(this.props.settings.selectedNounId)
   }
   render () {
-    const { nouns, settings } = this.props
+    const { nouns, settings, tryingWearables } = this.props
 
     // If we don't have a selectedNounId but we do have nouns loaded, just
     // grab the first one and auto select it
@@ -75,6 +76,16 @@ class Noun extends Component {
 
     const selectedNoun =
       settings.selectedNounId && nouns.byId[settings.selectedNounId]
+
+    const buildSVG = () => {
+      let rects = selectedNoun.headRect
+      for (let i = 0; i < tryingWearables.allIds.length; i++) {
+        let id = tryingWearables.allIds[i]
+        let wearable = tryingWearables.byId[id]
+        rects = rects + getRectFromSVG(wearable.svg)
+      }
+      return rects
+    }
 
     return (
       <div className={styles.columns}>
@@ -97,7 +108,7 @@ class Noun extends Component {
                     <svg
                       className={styles.overlay}
                       dangerouslySetInnerHTML={{
-                        __html: selectedNoun.headRect
+                        __html: buildSVG()
                       }}
                       width='320'
                       height='320'

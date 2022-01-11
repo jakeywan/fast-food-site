@@ -40,16 +40,10 @@ class Header extends Component {
                   key={id}
                   onClick={() => this.wear(wearables.byId[id])}
                   className={styles.wearable + ' ' + (tryingWearables.allIds.indexOf(id) > -1 && styles.selected)}>
-                  <svg
+                  <div
                     dangerouslySetInnerHTML={{
-                      __html: wearables.byId[id].rect
+                      __html: wearables.byId[id].svg
                     }}
-                    width='320'
-                    height='320'
-                    viewBox='0 0 320 320'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'
-                    shapeRendering='crispEdges'
                   />
                   <div>{wearables.byId[id].name}</div>
                 </div>

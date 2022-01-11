@@ -19,23 +19,15 @@ class ClothingSelector extends Component {
     const { tryingWearables, unwear, tryOn, settings, cancel, onClickWearClothes } = this.props
     return (
       <div>
-        <div className={styles.subHeader}>Trying on</div>
+        <div className={styles.subHeader}>Drag to change order</div>
         {tryingWearables.allIds.map(id => {
           const item = tryingWearables.byId[id]
             return (
-              <div className={styles.listItem}>
-
-                <div>
-                  <svg
-                    width='50'
-                    height='50'
-                    viewBox='0 0 320 320'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'
-                    shapeRendering='crispEdges'
+              <div className={styles.listItem} key={id}>
+                <div
                     dangerouslySetInnerHTML={{
-                    __html: item.rect
-                  }} />
+                    __html: item.svg
+                  }}>
                 </div>
                 <div
                   className={styles.removeButton}
