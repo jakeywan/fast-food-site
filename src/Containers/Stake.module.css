@@ -1,0 +1,46 @@
+.container {
+  max-width: 1140px;
+  margin: auto;
+  padding-bottom: 132px;
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 32px;
+}
+
+.button {
+  padding: 6px;
+  background: yellow;
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  border-radius: 4px;
+  background: #eed811;
+  font-size: 32px;
+  font-family: 'Londrina';
+  display: inline-block;
+  border-radius: 8px;
+  margin-top: 32px;
+}
+
+.noun {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+}
+
+.header {
+  font-family: 'Londrina';
+  font-size: 52px;
+  padding-top: 32px;
+}
+
+.container input {
+  padding: 15px;
+  margin-right: 16px;
+  font-size: 21px;
+}

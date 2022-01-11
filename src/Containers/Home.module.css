@@ -1,0 +1,32 @@
+.container {
+  padding: 16px;
+  box-sizing: border-box;
+  background: #e1d7d5;
+  padding-bottom: 0;
+}
+
+.innerContainer {
+  max-width: 1140px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.container img {
+  width: 540px;
+  height: 540px;
+}
+
+.container h1 {
+  font-family: 'Londrina';
+  font-size: 80px;
+  color:  #e11833;
+  display: inline-flex;
+  margin: 0;
+  padding-bottom: 16px;
+  line-height: 90px;
+}
+
+.wrap {
+  padding: 32px;
+}

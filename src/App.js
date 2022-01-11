@@ -3,8 +3,12 @@ import Nav from './Containers/Nav'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import nounPointer from './assets/noun-pointer.png'
-import Explainer from './Containers/Explainer';
+import Explainer from './Containers/Explainer'
 import styles from './App.module.css'
+import Home from './Containers/Home'
+import { Routes, Route } from 'react-router-dom'
+import Stake from './Containers/Stake'
+import Closet from './Containers/Closet'
 
 function App () {
   return (
@@ -15,8 +19,11 @@ function App () {
           the place like yesterday). Come back soon.
         </div>
         <Nav />
-        <Header />
-        <Explainer />
+        <Routes>
+          <Route path='/' element={<Home />}  />
+          <Route path='/stake' element={<Stake />} />
+          <Route path='/closet' element={<Closet />} />
+        </Routes>
       </div>
     </Provider>
   )
