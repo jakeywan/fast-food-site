@@ -15,14 +15,6 @@ class Noun extends Component {
     isTryingClothes: false,
     tryingClothes: []
   }
-  componentDidMount () {
-    store.dispatch(updateSettings({
-      ...this.props.settings,
-      backgroundColor: getSVGBackgroundColor(
-        this.props.nouns.byId[this.props.settings.selectedNounId].token_metadata
-      )
-    }))
-  }
   componentWillUnmount () {
     store.dispatch(updateSettings({
       ...this.props.settings,
@@ -102,7 +94,7 @@ class Noun extends Component {
       store.dispatch(
         updateSettings({
           ...settings,
-          selectedNounId: nouns.byId[nouns.allIds[0]]
+          selectedNounId: nouns.allIds[0]
         })
       )
     }
@@ -115,39 +107,23 @@ class Noun extends Component {
         {selectedNoun && (
           <React.Fragment>
             <div className={styles.imageContainer}>
-              {/* {!settings.connectedAddress &&
-                <div>nt connected</div>
-              } */}
               {!this.state.isTryingClothes && (
                 // keeping this here in case we want to use opensea as fallback
                 // <img src={ || nouns.byId[settings.selectedNounId].image_url} />
                 <div
                   className={styles.originalImage}
                   dangerouslySetInnerHTML={{
-                    __html: svgsById[settings.selectedNounId]
+                    __html: selectedNoun.svg
                   }}
                 />
               )}
               {this.state.isTryingClothes && (
-                // this basically creates an underlay (base SVG with no extra clothes)
-                // and an overlay (items you can select from). it defaults to showing
-                // items you're already wearing as selected.
                 <React.Fragment>
                   <div className={styles.svgEditingContainer}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: removeClothesFromSVG(
-                          svgsById[settings.selectedNounId],
-                          clothingStatesById[settings.selectedNounId]
-                        )
-                      }}
-                    />
                     <svg
                       className={styles.overlay}
                       dangerouslySetInnerHTML={{
-                        __html: composeSVGForClothingIds(
-                          this.state.tryingClothes
-                        )
+                        __html: selectedNoun.headRect
                       }}
                       width='320'
                       height='320'
@@ -211,7 +187,7 @@ class Noun extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    nouns: state.nouns,
+    nouns: state.polyNouns,
     clothingStatesById: state.clothingStatesById,
     settings: state.settings,
     svgsById: state.svgsById

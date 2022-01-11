@@ -30,7 +30,6 @@ export const fetchNouns = (owner) => {
       // whenever we load new nouns, also auto-select the first one
       store.dispatch(updateSettings({
         ...store.getState().settings,
-        selectedNounId: res.data.assets[0].token_id,
         connectedAddress: owner
       }))
       // also fetch and load clothing states for each of them

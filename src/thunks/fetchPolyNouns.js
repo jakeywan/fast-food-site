@@ -4,6 +4,7 @@ import { loadPolyNoun, updateSettings } from '../redux/actions'
 import { polyNounsContractFactory } from '../utilities/polyNounsContractFactory'
 import { ethers } from 'ethers'
 import { getSVGFromEncodedURI } from '../utilities/getSVGFromEncodedURI';
+import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor';
 
 export const fetchPolyNouns = async (owner) => {
   console.log(owner)
@@ -29,6 +30,14 @@ export const fetchPolyNouns = async (owner) => {
     }
 
     store.dispatch(loadPolyNoun(finalData))
+
+    if (i === 0) {
+      store.dispatch(updateSettings({
+        ...store.getState().settings,
+        backgroundColor: getSVGBackgroundColor(svg),
+        selectedNounId: tokenIdNum
+      }))
+    }
 
   }
 

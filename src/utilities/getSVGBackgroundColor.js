@@ -1,10 +1,8 @@
 import { getSVGFromEncodedURI } from "./getSVGFromEncodedURI"
 
-export const getSVGBackgroundColor = (tokenMetadata) => {
-  let decodedSVG = getSVGFromEncodedURI(tokenMetadata)
-  // now grab fill color from svg tag
+export const getSVGBackgroundColor = (svg) => {
   const htmlObject = document.createElement('div')
-  htmlObject.innerHTML = decodedSVG;
+  htmlObject.innerHTML = svg;
   const fill = htmlObject.getElementsByTagName('rect')[0].getAttribute('fill')
   return fill
 }
