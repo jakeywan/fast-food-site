@@ -2,8 +2,19 @@ import React, { Component } from 'react'
 import { clothes } from '../wearables/clothes'
 import styles from './ClothingSelector.module.css'
 import { connect } from 'react-redux'
+import store from '../redux/store'
+import { tryWearables } from '../redux/actions'
 
 class ClothingSelector extends Component {
+  unwear = itemId => {
+    let indexOf = this.props.tryingWearables.allIds.indexOf(itemId)
+    let newObj = { ...this.props.tryingWearables }
+    delete newObj.byId[itemId]
+    newObj.allIds.splice(indexOf, 1)
+    store.dispatch(tryWearables({
+      ...newObj
+    }))
+  }
   render () {
     const { tryingWearables, unwear, tryOn, settings, cancel, onClickWearClothes } = this.props
     return (
@@ -11,7 +22,6 @@ class ClothingSelector extends Component {
         <div className={styles.subHeader}>Trying on</div>
         {tryingWearables.allIds.map(id => {
           const item = tryingWearables.byId[id]
-          console.log(item)
             return (
               <div className={styles.listItem}>
 
@@ -29,7 +39,7 @@ class ClothingSelector extends Component {
                 </div>
                 <div
                   className={styles.removeButton}
-                  onClick={() => unwear(item)}
+                  onClick={() => this.unwear(id)}
                 >
                   Remove
                 </div>

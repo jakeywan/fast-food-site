@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styles from './Noun.module.css'
 import store from '../redux/store'
-import { updateSettings } from '../redux/actions'
+import { updateSettings, tryWearables } from '../redux/actions'
 import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
 import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG'
 import { wearClothes } from '../thunks/wearClothes'
 import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor'
-import ClothingSelector from './ClothingSelector';
+import ClothingSelector from './ClothingSelector'
 
 class Noun extends Component {
   state = {
@@ -23,9 +23,6 @@ class Noun extends Component {
     this.setState({
       isTryingClothes: true
     })
-  }
-  unwear = itemId => {
-    
   }
   change = direction => {
     const allIds = this.props.nouns.allIds
@@ -54,9 +51,6 @@ class Noun extends Component {
       })
     )
   }
-  tryOn = id => {
-    
-  }
   cancel = () => {
     this.setState({
       isTryingClothes: false
@@ -66,7 +60,7 @@ class Noun extends Component {
     wearClothes(this.props.settings.selectedNounId)
   }
   render () {
-    const { nouns, settings, clothingStatesById, svgsById } = this.props
+    const { nouns, settings } = this.props
 
     // If we don't have a selectedNounId but we do have nouns loaded, just
     // grab the first one and auto select it
@@ -132,8 +126,6 @@ class Noun extends Component {
               
               {this.state.isTryingClothes && (
                 <ClothingSelector
-                  unwear={this.unwear}
-                  tryOn={this.tryOn}
                   settings={settings}
                   cancel={this.cancel}
                   onClickWearClothes={this.onClickWearClothes}
@@ -155,9 +147,8 @@ class Noun extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     nouns: state.polyNouns,
-    clothingStatesById: state.clothingStatesById,
     settings: state.settings,
-    svgsById: state.svgsById
+    tryingWearables: state.tryingWearables
   }
 }
 
