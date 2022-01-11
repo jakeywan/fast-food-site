@@ -4,6 +4,8 @@
   margin: auto;
   padding: 16px;
   box-sizing: border-box;
+  font-family: 'Londrina';
+  font-size: 21px;
 }
 
 .wrap {

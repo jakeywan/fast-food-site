@@ -16,11 +16,21 @@
 }
 
 .wearable {
-  width: 200px;
-  padding-top: 16px;
+  margin-top: 16px;
+  box-sizing: border-box;
 }
 
 .wearable svg {
   width: 200px;
   height: 200px;
+}
+
+.header {
+  font-size: 46px;
+  font-family: 'Londrina';
+  margin-top: 32px;
+}
+
+.selected {
+  box-shadow: 4px -6px 1px 1px #e11833, 5px 5px 15px 5px rgb(0 0 0 / 0%)
 }

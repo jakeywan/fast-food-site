@@ -7,7 +7,6 @@ import { getSVGFromEncodedURI } from '../utilities/getSVGFromEncodedURI';
 import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor';
 
 export const fetchPolyNouns = async (owner) => {
-  console.log(owner)
   let contract = await polyNounsContractFactory()
   // check which tokens this user owns
   let balance = await contract.balanceOf(owner)

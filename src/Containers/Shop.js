@@ -9,8 +9,8 @@ const Shop = () => {
       <iframe src='https://opensea.io/collection/fast-food-mart?embed=true'
         width='100%'
         height='100%'
-        frameborder='0'
-        allowfullscreen></iframe>
+        frameBorder='0'
+        allowFullScreen></iframe>
     </div>
   )
 }

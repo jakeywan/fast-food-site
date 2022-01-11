@@ -8,7 +8,6 @@ import { wearablesContractFactory } from '../utilities/wearablesContractFactory'
 import { getNameFromEncodedURI } from '../utilities/getNameFromEncodedURI';
 
 export const fetchWearables = async (owner) => {
-  console.log(owner)
   let contract = await wearablesContractFactory()
 
   // loop and check ownership
@@ -25,7 +24,6 @@ export const fetchWearables = async (owner) => {
     // if we made it this far, token exists, check user balance
     let balance = await contract.balanceOf(owner, i)
     let balanceNum = Number(ethers.BigNumber.from(balance).toNumber())
-    console.log(balanceNum)
 
     if (balanceNum === 0) return
     // if we made it this far, this user owns one of these wearables, fetch it
