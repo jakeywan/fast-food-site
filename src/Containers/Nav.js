@@ -16,17 +16,22 @@ class Nav extends Component {
           <div className={styles.column}>
             <Link to='/'><span>FFNs</span></Link>
           </div>
-          <div>
-            <Link to='/stake'>Stake</Link>
-          </div>
-          <div>
-            <Link to='/closet'>Closet</Link>
-          </div>
-          <div>
-            <Link to='/closet'>Shop</Link>
-          </div>
-          <div className={styles.column}>
-            <ConnectButton />
+          <div className={styles.sideRow}>
+            <div className={styles.navItem}>
+              <Link to='/stake'>Stake</Link>
+            </div>
+            <div className={styles.navItem}>
+              <Link to='/closet'>Closet</Link>
+            </div>
+            <div className={styles.navItem}>
+              <Link to='/shop'>Shop</Link>
+            </div>
+            <div className={styles.navItem}>
+              <Link to='/mint'>Mint</Link>
+            </div>
+            <div className={styles.navItem}>
+              <ConnectButton />
+            </div>
           </div>
         </div>        
       </div>

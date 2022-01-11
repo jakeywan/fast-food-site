@@ -8,3 +8,19 @@
   max-width: 1140px;
   max-height: 540px;
 }
+
+.grid {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.wearable {
+  width: 200px;
+  padding-top: 16px;
+}
+
+.wearable svg {
+  width: 200px;
+  height: 200px;
+}

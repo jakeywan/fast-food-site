@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Web3 from 'web3'
 import { fetchNouns } from '../thunks/fetchNouns'
 import { fetchPolyNouns } from '../thunks/fetchPolyNouns'
+import { fetchWearables } from '../thunks/fetchWearables';
 
 class ConnectButton extends Component {
   state = {
@@ -17,6 +18,7 @@ class ConnectButton extends Component {
         this.setState({ connectedAccount: address })
         fetchNouns(address)
         fetchPolyNouns(address)
+        fetchWearables(address)
       } else {
         fetchNouns()
       }

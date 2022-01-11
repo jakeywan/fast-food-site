@@ -15,14 +15,7 @@ export const initialStore = {
     connectedAddress: ''
   },
   wearables: {
-    nounsBodies: [],
-    nounsAccessories: [],
-    nounsGlasses: [],
-    customBodies: [],
-    customAccessories: [],
-    customGlasses: [],
-    customHats: [],
-    customBackgrounds: [],
-    customOverlays: []
+    byId: {},
+    allIds: []
   }
 }

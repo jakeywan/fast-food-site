@@ -1,6 +1,7 @@
 .container {
   max-width: 1140px;
   margin: auto;
+  padding: 16px;
   padding-bottom: 132px;
 }
 

@@ -9,6 +9,7 @@ import Home from './Containers/Home'
 import { Routes, Route } from 'react-router-dom'
 import Stake from './Containers/Stake'
 import Closet from './Containers/Closet'
+import Shop from './Containers/Shop'
 
 function App () {
   return (
@@ -23,6 +24,7 @@ function App () {
           <Route path='/' element={<Home />}  />
           <Route path='/stake' element={<Stake />} />
           <Route path='/closet' element={<Closet />} />
+          <Route path='/shop' element={<Shop />} />
         </Routes>
       </div>
     </Provider>

@@ -14,6 +14,14 @@ export function loadPolyNoun (noun) {
   }
 }
 
+export const LOAD_WEARABLE = 'LOAD_WEARABLE'
+export function loadWearable (wearable) {
+  return {
+    type: LOAD_WEARABLE,
+    wearable
+  }
+}
+
 export const LOAD_CLOTHING = 'LOAD_CLOTHING'
 export function loadClothing (tokenId, clothesList) {
   return {

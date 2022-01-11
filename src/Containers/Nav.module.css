@@ -9,8 +9,6 @@
 .wrap {
   display: flex;
   justify-content: space-between;
-  padding-top: 32px;
-  padding-bottom: 32px;
   align-items: center;
   max-width: 1140px;
   margin: auto;
@@ -19,5 +17,15 @@
 span {
   font-family: 'Nountown';
   font-size: 48px;
+  color: #e11833;
+}
+
+.sideRow {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navItem, .navItem a {
+  padding: 16px;
   color: #e11833;
 }
