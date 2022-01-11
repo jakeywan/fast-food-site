@@ -1,6 +1,6 @@
 import { initialStore } from './initialStore'
 import {
-  LOAD_NOUNS, UPDATE_SETTINGS, LOAD_CLOTHING, LOAD_SVGS, UPDATE_WEARABLES
+  LOAD_NOUNS, LOAD_POLY_NOUN, UPDATE_SETTINGS, LOAD_CLOTHING, LOAD_SVGS, UPDATE_WEARABLES
 } from './actions'
 
 function ffnApp (state = initialStore, action) {
@@ -12,6 +12,16 @@ function ffnApp (state = initialStore, action) {
             ...action.nouns
           },
           allIds: [...Object.keys(action.nouns)]
+        }
+      })
+    case LOAD_POLY_NOUN:
+      return Object.assign({}, state, {
+        polyNouns: {
+          byId: {
+            ...state.polyNouns.byId,
+            [action.noun.id]: action.noun
+          },
+          allIds: [...state.polyNouns.allIds, action.noun.id]
         }
       })
     case UPDATE_SETTINGS:

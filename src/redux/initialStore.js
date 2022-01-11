@@ -3,6 +3,10 @@ export const initialStore = {
     byId: {},
     allIds: []
   },
+  polyNouns: {
+    byId: {},
+    allIds: []
+  },
   svgsById: {},
   clothingStatesById: {},
   settings: {

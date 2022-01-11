@@ -6,6 +6,14 @@ export function loadNouns (nouns) {
   }
 }
 
+export const LOAD_POLY_NOUN = 'LOAD_POLY_NOUN'
+export function loadPolyNoun (noun) {
+  return {
+    type: LOAD_POLY_NOUN,
+    noun
+  }
+}
+
 export const LOAD_CLOTHING = 'LOAD_CLOTHING'
 export function loadClothing (tokenId, clothesList) {
   return {
