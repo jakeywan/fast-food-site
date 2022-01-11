@@ -15,6 +15,20 @@ class Noun extends Component {
     isTryingClothes: false,
     tryingClothes: []
   }
+  componentDidMount () {
+    store.dispatch(updateSettings({
+      ...this.props.settings,
+      backgroundColor: getSVGBackgroundColor(
+        this.props.nouns.byId[this.props.settings.selectedNounId].token_metadata
+      )
+    }))
+  }
+  componentWillUnmount () {
+    store.dispatch(updateSettings({
+      ...this.props.settings,
+      backgroundColor: '#e1d7d5'
+    }))
+  }
   tryClothes = () => {
     // set `isTryingClothes` to true
     // set the clothes they already have on to the `tryingClothes` array

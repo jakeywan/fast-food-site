@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import ConnectButton from '../Components/ConectButton';
 import styles from './Nav.module.css'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { createBrowserHistory } from "history"
 
 class Nav extends Component {
   render () {
     return (
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        style={{ background: settings.backgroundColor }}>
         <div className={styles.wrap}>
           <div className={styles.column}>
             <Link to='/'><span>FFNs</span></Link>
@@ -29,4 +33,10 @@ class Nav extends Component {
   }
 }
 
-export default Nav
+const mapStateToProps = (state, ownProps) => {
+  return {
+    settings: state.settings
+  }
+}
+
+export default connect(mapStateToProps)(Nav)

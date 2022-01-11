@@ -31,8 +31,7 @@ export const fetchNouns = (owner) => {
       store.dispatch(updateSettings({
         ...store.getState().settings,
         selectedNounId: res.data.assets[0].token_id,
-        connectedAddress: owner,
-        backgroundColor: getSVGBackgroundColor(res.data.assets[0].token_metadata)
+        connectedAddress: owner
       }))
       // also fetch and load clothing states for each of them
       fetchClothingStatePerNoun(Object.keys(finalObj))

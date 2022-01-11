@@ -1,10 +1,11 @@
-import React from 'react'
 import styles from './Home.module.css'
 import burgerDude from '../assets/burger-dude.svg'
+import React, { Component } from 'react'
 
-const Home = () => {
-  return (
-    <div className={styles.container}>
+class Home extends Component {
+  render () {
+    return (
+      <div className={styles.container}>
       <div className={styles.innerContainer}>
         <img src={burgerDude} />
         <div className={styles.wrap}>
@@ -21,7 +22,8 @@ const Home = () => {
         </div>
       </div>
     </div>
-  )
+    )
+  }
 }
 
 export default Home
