@@ -54,3 +54,11 @@ export function updateWearables (wearables) {
     wearables
   }
 }
+
+export const TRY_WEARABLES = 'TRY_WEARABLES'
+export function tryWearables (trying) {
+  return {
+    type: TRY_WEARABLES,
+    trying
+  }
+}

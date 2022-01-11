@@ -6,7 +6,8 @@ import {
   LOAD_CLOTHING,
   LOAD_SVGS,
   UPDATE_WEARABLES,
-  LOAD_WEARABLE
+  LOAD_WEARABLE,
+  TRY_WEARABLES
 } from './actions'
 
 function ffnApp (state = initialStore, action) {
@@ -62,6 +63,10 @@ function ffnApp (state = initialStore, action) {
           },
           allIds: [...state.wearables.allIds, action.wearable.id]
         }
+      })
+    case TRY_WEARABLES:
+      return Object.assign({}, state, {
+        tryingWearables: { ...action.trying }
       })
     default:
       return state

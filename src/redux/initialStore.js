@@ -7,6 +7,10 @@ export const initialStore = {
     byId: {},
     allIds: []
   },
+  tryingWearables: {
+    byId: {},
+    allIds: []
+  },
   svgsById: {},
   clothingStatesById: {},
   settings: {

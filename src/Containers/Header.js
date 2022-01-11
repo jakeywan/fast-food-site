@@ -3,38 +3,31 @@ import styles from './Header.module.css'
 import ConnectButton from '../Components/ConectButton'
 import Noun from '../Components/Noun'
 import { connect } from 'react-redux'
+import { tryWearables } from '../redux/actions'
+import store from '../redux/store'
 
 class Header extends Component {
-  state = {
-    trying: {
-      byId: {},
-      allIds: []
-    }
-  }
   wear = (wearable) => {
-    let indexOf = this.state.trying.allIds.indexOf(wearable.id)
+    let indexOf = this.props.tryingWearables.allIds.indexOf(wearable.id)
     if (indexOf < 0) {
-      this.setState({
-        trying: {
-          byId: {
-            ...this.state.trying.byId,
-            [wearable.id]: wearable
-          },
-          allIds: [...this.state.trying.allIds, wearable.id]
-        }
-      })
+      store.dispatch(tryWearables({
+        byId: {
+          ...this.props.tryingWearables.byId,
+          [wearable.id]: wearable
+        },
+        allIds: [...this.props.tryingWearables.allIds, wearable.id]
+      }))
     } else {
-      let newObj = { ...this.state.trying }
+      let newObj = { ...this.props.tryingWearables }
       delete newObj.byId[wearable.id]
       newObj.allIds.splice(indexOf, 1)
-      this.setState({
-        trying: newObj
-      })
-    }
-    
+      store.dispatch(tryWearables({
+        ...newObj
+      }))
+    }    
   }
   render () {
-    const { settings, wearables } = this.props
+    const { settings, wearables, tryingWearables } = this.props
     return (
       <div className={styles.container} style={{ background: settings.backgroundColor || '' }}>
         <div className={styles.wrap}>
@@ -46,7 +39,7 @@ class Header extends Component {
                 <div
                   key={id}
                   onClick={() => this.wear(wearables.byId[id])}
-                  className={styles.wearable + ' ' + (this.state.trying.allIds.indexOf(id) > -1 && styles.selected)}>
+                  className={styles.wearable + ' ' + (tryingWearables.allIds.indexOf(id) > -1 && styles.selected)}>
                   <svg
                     dangerouslySetInnerHTML={{
                       __html: wearables.byId[id].rect
@@ -72,7 +65,8 @@ class Header extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     settings: state.settings,
-    wearables: state.wearables
+    wearables: state.wearables,
+    tryingWearables: state.tryingWearables
   }
 }
 

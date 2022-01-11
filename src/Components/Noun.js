@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import styles from './Noun.module.css'
 import store from '../redux/store'
 import { updateSettings } from '../redux/actions'
-import { clothes } from '../wearables/clothes'
 import { composeSVGForClothingIds } from '../utilities/composeSVGForClothingIds'
 import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG'
 import { wearClothes } from '../thunks/wearClothes'
@@ -12,8 +11,7 @@ import ClothingSelector from './ClothingSelector';
 
 class Noun extends Component {
   state = {
-    isTryingClothes: false,
-    tryingClothes: []
+    isTryingClothes: false
   }
   componentWillUnmount () {
     store.dispatch(updateSettings({
@@ -22,25 +20,12 @@ class Noun extends Component {
     }))
   }
   tryClothes = () => {
-    // set `isTryingClothes` to true
-    // set the clothes they already have on to the `tryingClothes` array
-    // making a copy here because it was messing with our redux state
-    let tryingClothes = Object.assign(
-      [],
-      this.props.clothingStatesById[this.props.settings.selectedNounId]
-    )
     this.setState({
-      isTryingClothes: true,
-      tryingClothes: tryingClothes
+      isTryingClothes: true
     })
   }
   unwear = itemId => {
-    const newArray = this.state.tryingClothes
-    const indexToRemove = this.state.tryingClothes.indexOf(itemId)
-    newArray.splice(indexToRemove, 1)
-    this.setState({
-      tryingClothes: newArray
-    })
+    
   }
   change = direction => {
     const allIds = this.props.nouns.allIds
@@ -70,20 +55,15 @@ class Noun extends Component {
     )
   }
   tryOn = id => {
-    let newArray = this.state.tryingClothes
-    newArray.push(id)
-    this.setState({
-      tryingClothes: newArray
-    })
+    
   }
   cancel = () => {
     this.setState({
-      isTryingClothes: false,
-      tryClothes: []
+      isTryingClothes: false
     })
   }
   onClickWearClothes = () => {
-    wearClothes(this.props.settings.selectedNounId, this.state.tryingClothes)
+    wearClothes(this.props.settings.selectedNounId)
   }
   render () {
     const { nouns, settings, clothingStatesById, svgsById } = this.props
@@ -149,22 +129,9 @@ class Noun extends Component {
                   View on OpenSea
                 </a>
               </div>
-              {!this.state.isTryingClothes && (
-                <div>
-                  <div className={styles.subHeader}>Currently wearing</div>
-                  {clothingStatesById[settings.selectedNounId] &&
-                    clothingStatesById[settings.selectedNounId].map(item => {
-                      return (
-                        <div key={item.title} className={styles.listItem}>
-                          {clothes[item].title}
-                        </div>
-                      )
-                    })}
-                </div>
-              )}
+              
               {this.state.isTryingClothes && (
                 <ClothingSelector
-                  tryingClothes={this.state.tryingClothes}
                   unwear={this.unwear}
                   tryOn={this.tryOn}
                   settings={settings}
