@@ -24,7 +24,7 @@ class Nav extends Component {
               <Link to='/closet'>Closet</Link>
             </div>
             <div className={styles.navItem}>
-              <Link to='/shop'>Shop</Link>
+              <Link to='/shop'>Mart</Link>
             </div>
             <div className={styles.navItem}>
               <Link to='/mint'>Mint</Link>

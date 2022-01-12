@@ -45,3 +45,12 @@
   margin-right: 16px;
   font-size: 21px;
 }
+
+.empty {
+  font-size: 32px;
+  font-family: 'Londrina';
+  margin-top: 32px;
+  line-height: 40px;
+  background: #e1d7d5;
+  padding: 60px;
+}

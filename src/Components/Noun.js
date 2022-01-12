@@ -157,7 +157,7 @@ class Noun extends Component {
               }
               {!selectedNoun &&
                 <React.Fragment>
-                  <div className={styles.name} style={{ marginTop: 62 }}>
+                  <div className={styles.name} style={{ marginTop: 144 }}>
                     Looks like you haven't staked any Fast Food Nouns
                   </div>
                   <div className={styles.button}>

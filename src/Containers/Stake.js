@@ -35,12 +35,19 @@ class Stake extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.header}>Stake</div>
-        <div>
-          Depositing a Noun in the staking contract will automatically mint you
-          a new Noun on Polygon. It was take up to 20 minutes
+        <div style={{ maxWidth: 800 }}>
+          Depositing a Noun in the staking contract automatically activates a
+          cross-chain messaging system that will automatically mint you
+          a new Noun on Polygon. It will take up to 20 minutes after staking
           for your Polygon Noun to appear. Unstake any time. 
         </div>
         <div className={styles.wrap}>
+          {nouns.allIds.length === 0 &&
+            <div className={styles.empty}>
+              Looks like you don't have any Fast Food Nouns to stake. Visit the
+              collection on <a target='_blank' href='https://opensea.io/collection/fast-food-nouns'>OpenSea</a> to buy one.
+            </div>
+          }
           {nouns.allIds.length > 0  &&
             nouns.allIds.map((id) => {
               return (
@@ -55,7 +62,7 @@ class Stake extends Component {
           }
         </div>
         <div className={styles.header}>Unstake</div>
-        <div>
+        <div style={{ maxWidth: 800 }}>
           Reclaiming your Noun from the staking contract will automatically burn
           your Polygon Noun. Your wearable NFTs will not be affected.
         </div>
