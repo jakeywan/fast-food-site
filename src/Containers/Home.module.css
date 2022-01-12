@@ -30,3 +30,14 @@
 .wrap {
   padding: 32px;
 }
+
+.fill {
+  background: #782121;
+  flex: 1;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 95.5px);
+}

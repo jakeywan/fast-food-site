@@ -40,7 +40,7 @@ class Header extends Component {
             </div>
             {wearables.allIds.length === 0 &&
               <div className={styles.empty}>
-                <div>Looks like you're don't have any clothes! Head to the mint page to
+                <div>Looks like you don't have any clothes! Head to the mint page to
                 mint some freebies.</div>
                 <div className={styles.button}>
                   <Link to='/mint'>Mint some clothes</Link>
