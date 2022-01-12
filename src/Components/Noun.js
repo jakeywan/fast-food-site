@@ -50,7 +50,7 @@ class Noun extends Component {
       updateSettings({
         ...this.props.settings,
         selectedNounId: newId,
-        backgroundColor: getSVGBackgroundColor(noun.token_metadata)
+        backgroundColor: getSVGBackgroundColor(noun.svg)
       })
     )
   }
@@ -91,83 +91,85 @@ class Noun extends Component {
 
     return (
       <div className={styles.columns}>
-            <div className={styles.imageContainer}>
-              {!this.state.isTryingClothes && selectedNoun && (
-                // keeping this here in case we want to use opensea as fallback
-                // <img src={ || nouns.byId[settings.selectedNounId].image_url} />
-                <div
-                  className={styles.originalImage}
+        <div className={styles.imageContainer}>
+          {!this.state.isTryingClothes && selectedNoun && (
+            // keeping this here in case we want to use opensea as fallback
+            // <img src={ || nouns.byId[settings.selectedNounId].image_url} />
+            <div
+              className={styles.originalImage}
+              dangerouslySetInnerHTML={{
+                __html: selectedNoun.svg
+              }}
+            />
+          )}
+          {!selectedNoun &&
+            <div className={styles.originalImage}>
+              <img src={loadingSkull} style={{ width: '100%' }} />
+            </div>
+          }
+          {this.state.isTryingClothes && (
+            <React.Fragment>
+              <div className={styles.svgEditingContainer}>
+                <svg
+                  className={styles.overlay}
                   dangerouslySetInnerHTML={{
-                    __html: selectedNoun.svg
+                    __html: buildSVG()
                   }}
+                  width='320'
+                  height='320'
+                  viewBox='0 0 320 320'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                  shapeRendering='crispEdges'
+                />
+              </div>
+            </React.Fragment>
+          )}
+        </div>
+        <div className={styles.column}>
+          {selectedNoun &&
+            <React.Fragment>
+              {!!settings.connectedAddress && (
+                <div className={styles.nextButtons}>
+                  <div onClick={() => this.change('back')}>←</div>
+                  <div onClick={() => this.change('next')}>→</div>
+                </div>
+              )}
+              <div className={styles.name}>
+                Fast Food Noun #{selectedNoun.id}
+              </div>
+              <div>
+                <a href={selectedNoun.permalink} target='_blank'>
+                  View on OpenSea
+                </a>
+              </div>
+              {this.state.isTryingClothes && (
+                <ClothingSelector
+                  settings={settings}
+                  cancel={this.cancel}
+                  onClickWearClothes={this.onClickWearClothes}
                 />
               )}
-              {/* {!selectedNoun && */}
-                <div className={styles.originalImage}>
-                  <img src={loadingSkull} style={{ width: '100%' }} />
+              {!this.state.isTryingClothes && (
+                <div onClick={this.tryClothes} className={styles.button}>
+                  Try on clothes
                 </div>
-              {/* } */}
-              {this.state.isTryingClothes && (
-                <React.Fragment>
-                  <div className={styles.svgEditingContainer}>
-                    <svg
-                      className={styles.overlay}
-                      dangerouslySetInnerHTML={{
-                        __html: buildSVG()
-                      }}
-                      width='320'
-                      height='320'
-                      viewBox='0 0 320 320'
-                      fill='none'
-                      xmlns='http://www.w3.org/2000/svg'
-                      shapeRendering='crispEdges'
-                    />
-                  </div>
-                </React.Fragment>
               )}
-            </div>
-            <div className={styles.column}>
-              {selectedNoun &&
-                <React.Fragment>
-                  {!!settings.connectedAddress && (
-                    <div className={styles.nextButtons}>
-                      <div onClick={() => this.change('back')}>←</div>
-                      <div onClick={() => this.change('next')}>→</div>
-                    </div>
-                  )}
-                  <div className={styles.name}>{selectedNoun.name}</div>
-                  <div>
-                    <a href={selectedNoun.permalink} target='_blank'>
-                      View on OpenSea
-                    </a>
-                  </div>
-                  {this.state.isTryingClothes && (
-                    <ClothingSelector
-                      settings={settings}
-                      cancel={this.cancel}
-                      onClickWearClothes={this.onClickWearClothes}
-                    />
-                  )}
-                  {!this.state.isTryingClothes && (
-                    <div onClick={this.tryClothes} className={styles.button}>
-                      Try on clothes
-                    </div>
-                  )}
-                </React.Fragment>
-              }
-              {!selectedNoun &&
-                <React.Fragment>
-                  <div className={styles.name} style={{ marginTop: 144 }}>
-                    Looks like you haven't staked any Fast Food Nouns
-                  </div>
-                  <div className={styles.button}>
-                    <Link to='/stake' style={{ color: 'black' }}>
-                      View staking page
-                    </Link>
-                  </div>
-                </React.Fragment>
-              }
-            </div>
+            </React.Fragment>
+          }
+          {!selectedNoun &&
+            <React.Fragment>
+              <div className={styles.name} style={{ marginTop: 144 }}>
+                Looks like you haven't staked any Fast Food Nouns
+              </div>
+              <div className={styles.button}>
+                <Link to='/stake' style={{ color: 'black' }}>
+                  View staking page
+                </Link>
+              </div>
+            </React.Fragment>
+          }
+        </div>
       </div>
     )
   }
