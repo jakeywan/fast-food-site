@@ -29,7 +29,10 @@ class Nav extends Component {
             <div className={styles.navItem}>
               <Link to='/mint'>Mint</Link>
             </div>
-            <div className={styles.navItem}>
+            <div className={styles.navItem + ' ' + styles.network}>
+              {settings.network &&
+                <div>{settings.network} &nbsp;</div>
+              }
               <ConnectButton />
             </div>
           </div>

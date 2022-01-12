@@ -31,3 +31,11 @@ span {
   padding: 16px;
   color: #e11833;
 }
+
+.network {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 16px;
+  background: white;
+  padding: 4px 8px;
+}

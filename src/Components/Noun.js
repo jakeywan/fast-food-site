@@ -138,7 +138,7 @@ class Noun extends Component {
           {selectedNoun &&
             <React.Fragment>
               {!!settings.connectedAddress && (
-                <div className={styles.nextButtons} style={nouns.allIds.length === 1 && { opacity: .1}}>
+                <div className={styles.nextButtons} style={nouns.allIds.length === 1 ? { opacity: .1} : {}}>
                   <div onClick={() => this.change('back')}>←</div>
                   <div onClick={() => this.change('next')}>→</div>
                 </div>

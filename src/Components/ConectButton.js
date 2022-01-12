@@ -5,12 +5,15 @@ import { fetchPolyNouns } from '../thunks/fetchPolyNouns'
 import { fetchWearables } from '../thunks/fetchWearables'
 import { updateSettings } from '../redux/actions'
 import store from '../redux/store'
+import { ethers } from 'ethers'
 
 class ConnectButton extends Component {
   state = {
     connectedAccount: ''
   }
   componentDidMount () {
+    // detect network
+    this.detectNetwork()
     // Get the connected account & setup event handler for account change
     if (!window.ethereum) return // prevents error thrown on mobile
     window.ethereum.on('accountsChanged', this.accountChangeHandler)
@@ -30,6 +33,18 @@ class ConnectButton extends Component {
         fetchNouns()
       }
     }, 500)
+  }
+  detectNetwork = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const web3 = new Web3(Web3.givenProvider)
+    const network = await web3.eth.getChainId()
+    let chain
+    if (network === 137) chain = 'Polygon'
+    if (network === 1) chain = 'Ethereum'
+    store.dispatch(updateSettings({
+      ...this.props.settings,
+      network: chain
+    }))
   }
   accountChangeHandler = (accounts) => {
     this.setState({ connectedAccount: accounts[0] })
