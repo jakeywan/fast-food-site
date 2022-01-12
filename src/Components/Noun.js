@@ -79,12 +79,20 @@ class Noun extends Component {
     const { nouns, tryingWearables, settings } = this.props
     const selectedNoun =
       settings.selectedNounId && nouns.byId[settings.selectedNounId]
-
-    let rects = selectedNoun.headRect
+    
+    let headIncluded = false
+    let rects
     for (let i = 0; i < tryingWearables.allIds.length; i++) {
       let id = tryingWearables.allIds[i]
       let wearable = tryingWearables.byId[id]
+      if (settings.headPosition === i) {
+        rects = rects + selectedNoun.headRect
+        headIncluded = true
+      }
       rects = rects + getRectFromSVG(wearable.svg)
+    }
+    if (!headIncluded) {
+      rects = rects + selectedNoun.headRect
     }
     return rects
   }

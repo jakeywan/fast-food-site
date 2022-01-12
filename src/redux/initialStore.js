@@ -16,7 +16,8 @@ export const initialStore = {
   settings: {
     selectedNounId: '',
     backgroundColor: '',
-    connectedAddress: ''
+    connectedAddress: '',
+    headPosition: 0
   },
   wearables: {
     byId: {},
