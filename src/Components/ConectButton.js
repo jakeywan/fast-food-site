@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import Web3 from 'web3'
 import { fetchNouns } from '../thunks/fetchNouns'
 import { fetchPolyNouns } from '../thunks/fetchPolyNouns'
-import { fetchWearables } from '../thunks/fetchWearables';
+import { fetchWearables } from '../thunks/fetchWearables'
+import { updateSettings } from '../redux/actions'
+import store from '../redux/store'
 
 class ConnectButton extends Component {
   state = {
@@ -16,6 +18,11 @@ class ConnectButton extends Component {
       let address = window.ethereum.selectedAddress
       if (address) {
         this.setState({ connectedAccount: address })
+        // whenever we load new nouns, also auto-select the first one
+        store.dispatch(updateSettings({
+          ...store.getState().settings,
+          connectedAddress: address
+        }))
         fetchNouns(address)
         fetchPolyNouns(address)
         fetchWearables(address)

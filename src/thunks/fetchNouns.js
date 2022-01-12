@@ -27,11 +27,7 @@ export const fetchNouns = (owner) => {
         finalObj[token.token_id] = token
       })
       store.dispatch(loadNouns(finalObj))
-      // whenever we load new nouns, also auto-select the first one
-      store.dispatch(updateSettings({
-        ...store.getState().settings,
-        connectedAddress: owner
-      }))
+      // TODO: remove
       // also fetch and load clothing states for each of them
       fetchClothingStatePerNoun(Object.keys(finalObj))
       // also fetch SVGs from node so we don't have to wait for metadata on OS

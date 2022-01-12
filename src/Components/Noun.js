@@ -72,9 +72,6 @@ class Noun extends Component {
       isTryingClothes: false
     })
   }
-  onClickWearClothes = () => {
-    wearClothes(this.props.settings.selectedNounId)
-  }
   buildSVG = () => {
     const { nouns, tryingWearables, settings } = this.props
     const selectedNoun =
@@ -141,7 +138,7 @@ class Noun extends Component {
           {selectedNoun &&
             <React.Fragment>
               {!!settings.connectedAddress && (
-                <div className={styles.nextButtons}>
+                <div className={styles.nextButtons} style={nouns.allIds.length === 1 && { opacity: .1}}>
                   <div onClick={() => this.change('back')}>←</div>
                   <div onClick={() => this.change('next')}>→</div>
                 </div>
@@ -158,7 +155,6 @@ class Noun extends Component {
                 <ClothingSelector
                   settings={settings}
                   cancel={this.cancel}
-                  onClickWearClothes={this.onClickWearClothes}
                 />
               )}
               {!this.state.isTryingClothes && (

@@ -35,6 +35,9 @@ class Header extends Component {
           <Noun />
           <div style={{ padding: 16, boxSizing: 'border-box' }}>
             <div className={styles.header}>Closet</div>
+            <div style={{ maxWidth: 800 }}>
+              We're fetching these from the blockchain, it might take a few moments to load them all.
+            </div>
             {wearables.allIds.length === 0 &&
               <div className={styles.empty}>
                 <div>Looks like you're don't have any clothes! Head to the mint page to
