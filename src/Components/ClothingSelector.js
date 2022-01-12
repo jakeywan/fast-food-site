@@ -15,6 +15,17 @@ class ClothingSelector extends Component {
       ...newObj
     }))
   }
+  shift = (direction, id) => {
+    const currentOrder = [ ...this.props.tryingWearables.allIds ]
+    const index = currentOrder.indexOf(id)
+    currentOrder.splice(index, 1)
+    currentOrder.splice(direction === 'right' ? index + 1 : index - 1, 0, id)
+    console.log(currentOrder)
+    store.dispatch(tryWearables({
+      byId: this.props.tryingWearables.byId,
+      allIds: currentOrder
+    }))
+  }
   render () {
     const { tryingWearables, unwear, settings, cancel, onClickWearClothes } = this.props
     return (
@@ -30,11 +41,16 @@ class ClothingSelector extends Component {
                       __html: item.svg
                     }}>
                   </div>
-                  <div
-                    className={styles.removeButton}
-                    onClick={() => this.unwear(id)}
-                  >
-                    X
+                  
+                  <div className={styles.shiftButtons}>
+                    <div onClick={() => this.shift('left', id)}>←</div>
+                    <div onClick={() => this.shift('right', id)}>→</div>
+                    <div
+                      className={styles.removeButton}
+                      onClick={() => this.unwear(id)}
+                    >
+                      X
+                    </div>
                   </div>
                 </div>
               )
