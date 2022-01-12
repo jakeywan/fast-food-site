@@ -44,7 +44,7 @@ class Stake extends Component {
           {nouns.allIds.length > 0  &&
             nouns.allIds.map((id) => {
               return (
-                <div className={styles.noun}>
+                <div className={styles.noun} key={id}>
                   <img src={nouns.byId[id].image_url} />
                   <div className={styles.button} onClick={() => this.stake(id)}>
                     Stake

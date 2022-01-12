@@ -1,5 +1,5 @@
 .container {
-  background: #d5d7e1;
+  background: rgb(225, 215, 213);
   width: 100%;
 }
 
@@ -7,6 +7,7 @@
   margin: auto;
   max-width: 1140px;
   max-height: 540px;
+  min-height: 540px;
 }
 
 .grid {

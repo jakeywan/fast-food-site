@@ -8,7 +8,9 @@ import { removeClothesFromSVG } from '../utilities/removeClothesFromSVG'
 import { wearClothes } from '../thunks/wearClothes'
 import { getSVGBackgroundColor } from '../utilities/getSVGBackgroundColor'
 import ClothingSelector from './ClothingSelector'
-import { getRectFromSVG } from '../utilities/getRectFromSVG';
+import { getRectFromSVG } from '../utilities/getRectFromSVG'
+import loadingSkull from '../assets/loading-skull-noun.gif'
+import { Link } from 'react-router-dom'
 
 class Noun extends Component {
   state = {
@@ -89,10 +91,8 @@ class Noun extends Component {
 
     return (
       <div className={styles.columns}>
-        {selectedNoun && (
-          <React.Fragment>
             <div className={styles.imageContainer}>
-              {!this.state.isTryingClothes && (
+              {!this.state.isTryingClothes && selectedNoun && (
                 // keeping this here in case we want to use opensea as fallback
                 // <img src={ || nouns.byId[settings.selectedNounId].image_url} />
                 <div
@@ -102,6 +102,11 @@ class Noun extends Component {
                   }}
                 />
               )}
+              {/* {!selectedNoun && */}
+                <div className={styles.originalImage}>
+                  <img src={loadingSkull} style={{ width: '100%' }} />
+                </div>
+              {/* } */}
               {this.state.isTryingClothes && (
                 <React.Fragment>
                   <div className={styles.svgEditingContainer}>
@@ -122,34 +127,47 @@ class Noun extends Component {
               )}
             </div>
             <div className={styles.column}>
-              {!!settings.connectedAddress && (
-                <div className={styles.nextButtons}>
-                  <div onClick={() => this.change('back')}>←</div>
-                  <div onClick={() => this.change('next')}>→</div>
-                </div>
-              )}
-              <div className={styles.name}>{selectedNoun.name}</div>
-              <div>
-                <a href={selectedNoun.permalink} target='_blank'>
-                  View on OpenSea
-                </a>
-              </div>
-              
-              {this.state.isTryingClothes && (
-                <ClothingSelector
-                  settings={settings}
-                  cancel={this.cancel}
-                  onClickWearClothes={this.onClickWearClothes}
-                />
-              )}
-              {!this.state.isTryingClothes && (
-                <div onClick={this.tryClothes} className={styles.button}>
-                  Try on clothes
-                </div>
-              )}
+              {selectedNoun &&
+                <React.Fragment>
+                  {!!settings.connectedAddress && (
+                    <div className={styles.nextButtons}>
+                      <div onClick={() => this.change('back')}>←</div>
+                      <div onClick={() => this.change('next')}>→</div>
+                    </div>
+                  )}
+                  <div className={styles.name}>{selectedNoun.name}</div>
+                  <div>
+                    <a href={selectedNoun.permalink} target='_blank'>
+                      View on OpenSea
+                    </a>
+                  </div>
+                  {this.state.isTryingClothes && (
+                    <ClothingSelector
+                      settings={settings}
+                      cancel={this.cancel}
+                      onClickWearClothes={this.onClickWearClothes}
+                    />
+                  )}
+                  {!this.state.isTryingClothes && (
+                    <div onClick={this.tryClothes} className={styles.button}>
+                      Try on clothes
+                    </div>
+                  )}
+                </React.Fragment>
+              }
+              {!selectedNoun &&
+                <React.Fragment>
+                  <div className={styles.name} style={{ marginTop: 62 }}>
+                    Looks like you haven't staked any Fast Food Nouns
+                  </div>
+                  <div className={styles.button}>
+                    <Link to='/stake' style={{ color: 'black' }}>
+                      View staking page
+                    </Link>
+                  </div>
+                </React.Fragment>
+              }
             </div>
-          </React.Fragment>
-        )}
       </div>
     )
   }
