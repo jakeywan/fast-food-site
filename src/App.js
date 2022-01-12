@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom'
 import Stake from './Containers/Stake'
 import Closet from './Containers/Closet'
 import Shop from './Containers/Shop'
+import Mint from './Containers/Mint'
 
 function App () {
   return (
@@ -25,6 +26,7 @@ function App () {
           <Route path='/stake' element={<Stake />} />
           <Route path='/closet' element={<Closet />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/mint' element={<Mint />} />
         </Routes>
       </div>
     </Provider>

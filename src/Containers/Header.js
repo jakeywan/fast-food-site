@@ -5,6 +5,7 @@ import Noun from '../Components/Noun'
 import { connect } from 'react-redux'
 import { tryWearables } from '../redux/actions'
 import store from '../redux/store'
+import { Link } from 'react-router-dom'
 
 class Header extends Component {
   wear = (wearable) => {
@@ -32,23 +33,34 @@ class Header extends Component {
       <div className={styles.container} style={{ background: settings.backgroundColor || '' }}>
         <div className={styles.wrap}>
           <Noun />
-          <div className={styles.header}>Closet</div>
-          <div className={styles.grid}>
-            {wearables.allIds.map(id => {
-              return (
-                <div
-                  key={id}
-                  onClick={() => this.wear(wearables.byId[id])}
-                  className={styles.wearable + ' ' + (tryingWearables.allIds.indexOf(id) > -1 && styles.selected)}>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: wearables.byId[id].svg
-                    }}
-                  />
-                  <div>{wearables.byId[id].name}</div>
+          <div style={{ padding: 16, boxSizing: 'border-box' }}>
+            <div className={styles.header}>Closet</div>
+            {wearables.allIds.length === 0 &&
+              <div className={styles.empty}>
+                <div>Looks like you're don't have any clothes! Head to the mint page to
+                mint some freebies.</div>
+                <div className={styles.button}>
+                  <Link to='/mint'>Mint some clothes</Link>
                 </div>
-              )
-            })}
+              </div>
+            }
+            <div className={styles.grid}>
+              {wearables.allIds.map(id => {
+                return (
+                  <div
+                    key={id}
+                    onClick={() => this.wear(wearables.byId[id])}
+                    className={styles.wearable + ' ' + (tryingWearables.allIds.indexOf(id) > -1 && styles.selected)}>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: wearables.byId[id].svg
+                      }}
+                    />
+                    <div>{wearables.byId[id].name}</div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>

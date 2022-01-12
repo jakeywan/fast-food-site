@@ -11,6 +11,14 @@
   padding-bottom: 32px;
 }
 
+.wearable {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  margin-right: 32px;
+}
+
 .button {
   padding: 6px;
   background: yellow;
@@ -26,31 +34,8 @@
   margin-top: 32px;
 }
 
-.noun {
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 32px;
-  margin-right: 32px;
-}
-
 .header {
   font-family: 'Londrina';
   font-size: 52px;
   padding-top: 32px;
-}
-
-.container input {
-  padding: 15px;
-  margin-right: 16px;
-  font-size: 21px;
-}
-
-.empty {
-  font-size: 32px;
-  font-family: 'Londrina';
-  margin-top: 32px;
-  line-height: 40px;
-  background: #e1d7d5;
-  padding: 60px;
 }

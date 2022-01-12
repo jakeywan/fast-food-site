@@ -16,6 +16,19 @@ class Noun extends Component {
   state = {
     isTryingClothes: false
   }
+  componentDidMount () {
+    const { settings, nouns } = this.props
+    // If we don't have a selectedNounId but we do have nouns loaded, just
+    // grab the first one and auto select it
+    if (!settings.selectedNounId && nouns.allIds.length) {
+      store.dispatch(
+        updateSettings({
+          ...settings,
+          selectedNounId: nouns.allIds[0]
+        })
+      )
+    }
+  }
   componentWillUnmount () {
     store.dispatch(updateSettings({
       ...this.props.settings,
@@ -77,21 +90,8 @@ class Noun extends Component {
   }
   render () {
     const { nouns, settings, tryingWearables } = this.props
-
-    // If we don't have a selectedNounId but we do have nouns loaded, just
-    // grab the first one and auto select it
-    if (!settings.selectedNounId && nouns.allIds.length) {
-      store.dispatch(
-        updateSettings({
-          ...settings,
-          selectedNounId: nouns.allIds[0]
-        })
-      )
-    }
-
     const selectedNoun =
       settings.selectedNounId && nouns.byId[settings.selectedNounId]
-
     return (
       <div className={styles.columns}>
         <div className={styles.imageContainer}>

@@ -25,14 +25,13 @@ export const fetchWearables = async (owner) => {
     let balance = await contract.balanceOf(owner, i)
     let balanceNum = Number(ethers.BigNumber.from(balance).toNumber())
 
-    if (balanceNum === 0) return
+    if (balanceNum === 0) continue
     // if we made it this far, this user owns one of these wearables, fetch it
     let wearable = tokenURI || await contract.tokenURI(i)
 
     if (!wearable) {
       console.log('missing data', i)
     }
-
 
     let finalData = {
       id: i,

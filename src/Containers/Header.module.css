@@ -13,12 +13,12 @@
 .grid {
   display: inline-flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .wearable {
   margin-top: 16px;
   box-sizing: border-box;
+  margin-right: 16px;
 }
 
 .wearable svg {
@@ -34,4 +34,27 @@
 
 .selected {
   box-shadow: 4px -6px 1px 1px #e11833, 5px 5px 15px 5px rgb(0 0 0 / 0%)
+}
+
+.empty {
+  font-size: 32px;
+  font-family: 'Londrina';
+  margin-top: 32px;
+  line-height: 40px;
+  background: #e1d7d5;
+  padding: 60px;
+}
+
+.button {
+  background: #eed811;
+  padding: 24px;
+  font-size: 32px;
+  font-family: 'Londrina';
+  display: inline-block;
+  border-radius: 8px;
+  margin-top: 32px;
+}
+
+.button a {
+  color: black;
 }
