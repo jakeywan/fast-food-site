@@ -5,12 +5,16 @@ import { ffnContractFactory } from '../utilities/ffnContractFactory'
 import { stakingContractFactory } from '../utilities/stakingContractFactory'
 import { ethers } from 'ethers'
 import web3 from 'web3'
+import { testAndPromptNetwork } from '../utilities/testAndPromptNetwork';
 
 class Stake extends Component {
   state = {
     tokenId: ''
   }
   stake = async (tokenId) => {
+    // first test network
+    const test = await testAndPromptNetwork('Ethereum', this.props.settings.network)
+    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     var signer = provider.getSigner()
     let contract = await ffnContractFactory(signer)
@@ -20,6 +24,8 @@ class Stake extends Component {
     let stake = await contract['safeTransferFrom(address,address,uint256)'](userAddy, stakingAddy, tokenId)
   }
   unstake = async () => {
+    const test = await testAndPromptNetwork('Ethereum', this.props.settings.network)
+
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     var signer = provider.getSigner()
     let contract = await stakingContractFactory(signer)

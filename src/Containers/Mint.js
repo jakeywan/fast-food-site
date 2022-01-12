@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { wearablesContractFactory } from '../utilities/wearablesContractFactory'
 import { ethers } from 'ethers'
 import web3 from 'web3'
+import { testAndPromptNetwork } from '../utilities/testAndPromptNetwork'
 
 class Mint extends Component {
   state = {
@@ -14,12 +15,16 @@ class Mint extends Component {
   }
   mint = async (id) => {
     // verify on polygon first
+    const test = await testAndPromptNetwork('Polygon', this.props.settings.network)
+
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     var signer = provider.getSigner()
     let contract = await wearablesContractFactory(signer)
     let mintOpen = await contract.mintOpenWearable(id)
   }
   claim = async (id) => {
+    const test = await testAndPromptNetwork('Polygon', this.props.settings.network)
+
     try {
       // verify on polygon first
       const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -104,7 +109,8 @@ class Mint extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    polyNouns: state.polyNouns
+    polyNouns: state.polyNouns,
+    settings: state.settings
   }
 }
 

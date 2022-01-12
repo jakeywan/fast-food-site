@@ -6,6 +6,7 @@ import store from '../redux/store'
 import { tryWearables, updateSettings } from '../redux/actions'
 import { polyNounsContractFactory } from '../utilities/polyNounsContractFactory'
 import { ethers } from 'ethers'
+import { testAndPromptNetwork } from '../utilities/testAndPromptNetwork';
 
 class ClothingSelector extends Component {
   unwear = itemId => {
@@ -42,6 +43,8 @@ class ClothingSelector extends Component {
     }))
   }
   getDressedOnChain = async () => {
+    const test = await testAndPromptNetwork('Polygon', this.props.settings.network)
+
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     var signer = provider.getSigner()
     let contract = await polyNounsContractFactory(signer)

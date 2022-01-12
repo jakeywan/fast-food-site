@@ -17,6 +17,8 @@ class ConnectButton extends Component {
     // Get the connected account & setup event handler for account change
     if (!window.ethereum) return // prevents error thrown on mobile
     window.ethereum.on('accountsChanged', this.accountChangeHandler)
+    window.ethereum.on('chainChanged', this.chainChangeHandler)
+
     setTimeout(() => {
       let address = window.ethereum.selectedAddress
       if (address) {
@@ -42,7 +44,7 @@ class ConnectButton extends Component {
     if (network === 137) chain = 'Polygon'
     if (network === 1) chain = 'Ethereum'
     store.dispatch(updateSettings({
-      ...this.props.settings,
+      ...store.getState().settings,
       network: chain
     }))
   }
@@ -52,6 +54,9 @@ class ConnectButton extends Component {
       // fetch my nouns
       fetchNouns(accounts[0])
     }
+  }
+  chainChangeHandler = (data) => {
+    this.detectNetwork()
   }
   connectWallet = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
