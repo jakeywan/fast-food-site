@@ -13,12 +13,16 @@ class Home extends Component {
               <h1>You want fries with that?</h1>
               <div>
                 The Fast Food Nouns are an experiment in on chain, composable NFTs. There
-                are 1,000 FFNs, and owners can make, trade, and purchase exclusive NFT clothes and
-                accessories which they can also wear on chain.
+                are 1,000 FFNs. Owners can mint, trade, and purchase exclusive NFT clothes and
+                accessories to wear on the blockchain.
                 <br /><br />
-                You can purchase a Fast Food Noun on
+                To get started, pick up a Fast Food Noun on
                 &nbsp;<a href='https://opensea.io/collection/fast-food-nouns'>OpenSea</a>, then
-                stake it to bridge to Polygon to mint free clothes, or buy new ones. 
+                stake to Polygon to use NFT wearables.
+                <br /><br />
+                <b>IMPORTANT: This tech is highly experimental, and involves
+                4 different contracts, working together across chains. Please
+                use at your own risk!!</b>
               </div>
             </div>
           </div>
