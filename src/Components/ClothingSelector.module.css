@@ -4,28 +4,43 @@
   margin-bottom: 16px;
 }
 
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .listItem {
   font-size: 16px;
-  background: hsla(0,0%,100%,.3);
-
-  border-radius: 8px;
-  padding: 16px;
   font-weight: 600;
   margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+  position: relative;
+  margin-right: 16px;
 }
 
 .listItem svg {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
+  box-shadow: 4px -6px 1px 1px #e11833, 5px 5px 15px 5px rgb(0 0 0 / 0%);
 }
 
 .removeButton {
   color:#e11833;
-  display: inline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -11px;
+  right: -11px;
+  border-radius: 50%;
+  background: white;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  font-family: 'Londrina';
 }
 
 .button {

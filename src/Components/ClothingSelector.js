@@ -16,28 +16,30 @@ class ClothingSelector extends Component {
     }))
   }
   render () {
-    const { tryingWearables, unwear, tryOn, settings, cancel, onClickWearClothes } = this.props
+    const { tryingWearables, unwear, settings, cancel, onClickWearClothes } = this.props
     return (
       <div>
         <div className={styles.subHeader}>Drag to change order</div>
-        {tryingWearables.allIds.map(id => {
-          const item = tryingWearables.byId[id]
-            return (
-              <div className={styles.listItem} key={id}>
-                <div
-                    dangerouslySetInnerHTML={{
-                    __html: item.svg
-                  }}>
+        <div className={styles.grid}>
+          {tryingWearables.allIds.map(id => {
+            const item = tryingWearables.byId[id]
+              return (
+                <div className={styles.listItem} key={id}>
+                  <div
+                      dangerouslySetInnerHTML={{
+                      __html: item.svg
+                    }}>
+                  </div>
+                  <div
+                    className={styles.removeButton}
+                    onClick={() => this.unwear(id)}
+                  >
+                    X
+                  </div>
                 </div>
-                <div
-                  className={styles.removeButton}
-                  onClick={() => this.unwear(id)}
-                >
-                  Remove
-                </div>
-              </div>
-            )
+              )
           })}
+        </div>
         <div>
           {settings.connectedAddress &&
             <div

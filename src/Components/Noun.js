@@ -62,6 +62,19 @@ class Noun extends Component {
   onClickWearClothes = () => {
     wearClothes(this.props.settings.selectedNounId)
   }
+  buildSVG = () => {
+    const { nouns, tryingWearables, settings } = this.props
+    const selectedNoun =
+      settings.selectedNounId && nouns.byId[settings.selectedNounId]
+
+    let rects = selectedNoun.headRect
+    for (let i = 0; i < tryingWearables.allIds.length; i++) {
+      let id = tryingWearables.allIds[i]
+      let wearable = tryingWearables.byId[id]
+      rects = rects + getRectFromSVG(wearable.svg)
+    }
+    return rects
+  }
   render () {
     const { nouns, settings, tryingWearables } = this.props
 
@@ -78,16 +91,6 @@ class Noun extends Component {
 
     const selectedNoun =
       settings.selectedNounId && nouns.byId[settings.selectedNounId]
-
-    const buildSVG = () => {
-      let rects = selectedNoun.headRect
-      for (let i = 0; i < tryingWearables.allIds.length; i++) {
-        let id = tryingWearables.allIds[i]
-        let wearable = tryingWearables.byId[id]
-        rects = rects + getRectFromSVG(wearable.svg)
-      }
-      return rects
-    }
 
     return (
       <div className={styles.columns}>
@@ -113,7 +116,7 @@ class Noun extends Component {
                 <svg
                   className={styles.overlay}
                   dangerouslySetInnerHTML={{
-                    __html: buildSVG()
+                    __html: this.buildSVG()
                   }}
                   width='320'
                   height='320'
